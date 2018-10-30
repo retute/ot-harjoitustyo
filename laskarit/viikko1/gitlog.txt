@@ -1,3 +1,5 @@
+Harjoitus: gitlog
+
 commit 6c567595cce4b74b2cc054e83019b25261778fcf
 Author: Reetta <reetta.tervo@helsinki.fi>
 Date:   Tue Oct 30 12:56:57 2018 +0200
