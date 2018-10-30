@@ -1,0 +1,36 @@
+commit 6c567595cce4b74b2cc054e83019b25261778fcf
+Author: Reetta <reetta.tervo@helsinki.fi>
+Date:   Tue Oct 30 12:56:57 2018 +0200
+
+    file3 muokattu ja peruttu. file1 poistettu ja file 2 nimettu file22
+
+ tiedostoja/file2.txt                 | 0
+ tiedostoja/{file1.txt => file22.txt} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit a923bf9418351b9b7cb1976cf23bebde2c6f99e2
+Author: Reetta <reetta.tervo@helsinki.fi>
+Date:   Tue Oct 30 12:49:05 2018 +0200
+
+    luotu hakemisto tiedostoja ja sinne tieodstot file1, file2 ja file3
+
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit ba29dd0f0f129bea70b40e65b039276ceea13c57
+Author: Reetta <reetta.tervo@helsinki.fi>
+Date:   Tue Oct 30 12:41:22 2018 +0200
+
+    muokattiin tiedostoja eka.txt ja kolmas.txt
+
+ eka.txt    | 3 +--
+ kolmas.txt | 4 ++--
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+commit ff87f5c6e5a97bdfb4250198eedd5cff4f3f1864
+Author: Reetta <reetta.tervo@helsinki.fi>
+Date:   Tue Oct 30 12:39:03 2018 +0200
+
+    uudelleen nimettiin tiedosto.txt nimellä eka.txt
