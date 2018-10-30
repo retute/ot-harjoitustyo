@@ -1,5 +1,7 @@
-# OT-harjoitustyö
+# Ohjelmistotekniikka, harjoitustyö
 
-Tämä työ on kurssin keskeisin osio ja sitä tehdään *osio kerrallaan*. Työn aiheen saa itse 
-valita, esim **ToDo-sovellus.** Sovelluksen tulee toimia pöytäkoneella. _Työtä **ei voi** jatkaa 
-kurssin jälkeen!_
+Tänne päivitetään viikottaiset *harjoitukset* ja kurssilla tehtävä *hajoitustyö*. Työtä **ei vo** jatkaa kurssin jälkeen!
+
+## **Viikko 1**
+[gitlog.txt](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+[komentorivi.txt](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
