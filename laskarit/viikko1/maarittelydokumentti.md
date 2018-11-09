@@ -1,8 +1,8 @@
 #Alustava määrittelydokumentti
-
-##Sovelluksen tarkoitus
+ ##Sovelluksen tarkoitus
 Sovellut on budjettisovellus. Tarkemmin se on tarkoitettu lomamatkan tai 
--matkojen budjettien suunnitteluun. Sen tarkoitus on auttaa tulevan loman 
+-matkojen budjettien suunnitteluun. Sen tarkoitus on auttaa tulevan 
+loman 
 suunnittelussa sille asetetun budjetin ehdoin. 
 ##Käyttäjät
 Sovelluksella on toistaiseksi vain normaaleja käyttäjiä, jotka 
