@@ -8,4 +8,4 @@ voi** jatkaa kurssin jälkeen!
 >
 >[*komentorivi.txt*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
-Dokumentointi
+[*Dokumentointi*](https://github.com/retute/ot-harjoitustyo/blob/dc119f0d6ed6c5032a7cc84cb117aa527440cf78/laskarit/viikko1/maarittelydokumentti.md)
