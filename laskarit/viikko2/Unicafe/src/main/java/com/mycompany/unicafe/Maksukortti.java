@@ -4,6 +4,8 @@ package com.mycompany.unicafe;
 public class Maksukortti {
  
     private int saldo;
+    private final double EDULLINEN =   2.6;
+    private final double MAUKAS = 4.0;
  
     public Maksukortti(int saldo) {
         this.saldo = saldo;
@@ -25,6 +27,7 @@ public class Maksukortti {
         this.saldo = this.saldo - maara;
         return true;
     }
+ 
 
     @Override
     public String toString() {
