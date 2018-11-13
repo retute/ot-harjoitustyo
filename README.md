@@ -14,3 +14,5 @@ voi** jatkaa kurssin jälkeen!
 ### Viikko 2
 >[*Screenshot*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko2/Screenshot%20from%202018-11-12%2015-46-45.png)
 
+[**Työaikakirjanpito**](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko2/tyoaikakirjanpito.md)
+
