@@ -16,3 +16,7 @@ voi** jatkaa kurssin jälkeen!
 
 [**Työaikakirjanpito**](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko2/tyoaikakirjanpito.md)
 
+
+### Viikko 3
+>[*Luokkakaavio*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko3/luokkakaavio.png)
+
