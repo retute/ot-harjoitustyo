@@ -5,16 +5,22 @@ public class User {
     
     private String username;
     private int id;
+    private String password;
     
-    public void User() {
+
+    public User() {
         
     }
     
-    public void User(int id, String username) {
+    public User(int id, String username) {
         
     }
     
     public void setUserName(String name) {
         this.username = name;
+    }
+    
+    public String getUsername() {
+    	return this.username;
     }
 }

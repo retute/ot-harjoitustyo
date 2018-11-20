@@ -23,9 +23,18 @@ public class Activity {
     public void setPriorityNumber(int number) {
     	if (number > 0 && number <= 10) {
     		this.priorityNumber = number;
+    	} else {
+    		this.priorityNumber = 0;
     	}
     }
      
+    public String getName() {
+    	return this.name;
+    }
     
+    public int getPrice() {
+    	return this.price;
+    }
+     
     
 }
