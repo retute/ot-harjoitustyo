@@ -6,3 +6,5 @@ Päivä | Aika | Mitä tein
 10.11. | 1 | Alustava määrittelydokumentti
 12.11. | 1 | Alustava määrittelydokumentti valmiiksi ja linkkien lisääminen githubiin
 17.11. | 2 | Luokkien muotoilua ja luokkakaavion suunnittelua
+19.11. | 1 | Luokkien säätöä
+20.11. | 4 | Luokkien metodien lisäily ja testien aloittaminen
