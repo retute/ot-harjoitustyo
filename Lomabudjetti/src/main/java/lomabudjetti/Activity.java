@@ -6,10 +6,15 @@ public class Activity {
     private int price;
     private int priorityNumber;
     
-    public void Activity(String name, int price, int priority) {
+    public Activity(String name, int price, int priority) {
         this.name = name;
         this.price = price;
-        this.priorityNumber = priority;
+        
+        if (priority > 0 && priority <= 10) {
+            this.priorityNumber = priority;
+        } else {
+            this.priorityNumber = 0;
+        }
     }
     
     public void setName(String name) {
@@ -34,6 +39,10 @@ public class Activity {
     
     public int getPrice() {
     	return this.price;
+    }
+    
+    public int getPriorityNumber() {
+        return this.priorityNumber;
     }
      
     
