@@ -14,15 +14,3 @@ Testausdokumentti
 [Työaikakirjanpito](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko2/tyoaikakirjanpito.md)
 
 
-### Viikko 1
->[*gitlog.txt*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
->
->[*komentorivi.txt*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-
-### Viikko 2
->[*Screenshot*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko2/Screenshot%20from%202018-11-12%2015-46-45.png)
-
-
-### Viikko 3
->[*Luokkakaavio*](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko3/luokkakaavio.png)
-

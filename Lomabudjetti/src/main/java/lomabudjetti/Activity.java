@@ -21,10 +21,6 @@ public class Activity {
     	this.name = name;
     }
     
-    public void setPrice(int price) {
-    	this.price = price;
-    }
-    
     public void setPriorityNumber(int number) {
     	if (number > 0 && number <= 10) {
     		this.priorityNumber = number;

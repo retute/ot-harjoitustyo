@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class HolidayTest {
 
 	Holiday holiday;
-	
+        
 	@Before
 	public void setUp() {
 		holiday = new Holiday("Krabi", 1000);
