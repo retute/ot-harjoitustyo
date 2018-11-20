@@ -10,8 +10,13 @@ public class Holiday {
 	private List<Activity> activities;
 	private User user;
 	
-	public void Holiday(Sting destination, int budget) {
-		
+	public void holiday(String destination, int budget) {
+		this.destination = destination;
+		this.budget = budget;
+	}
+	
+	public void addActivity(Activity activity) {
+		activities.add(activity);
 	}
 	
     
