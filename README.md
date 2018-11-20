@@ -11,6 +11,5 @@ Arkkitehtuuri
 
 Testausdokumentti
 
-[Työaikakirjanpito](https://github.com/retute/ot-harjoitustyo/blob/master/laskarit/viikko2/tyoaikakirjanpito.md)
-
+[Työaikakirjanpito](https://github.com/retute/ot-harjoitustyo/blob/master/tyoaikakirjanpito.md)
 
