@@ -11,6 +11,7 @@ public class HolidayService {
     
     public void planHoliday(String destination) {
         Holiday holiday = new Holiday(destination, user);
+        
     }
     
     
