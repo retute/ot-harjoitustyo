@@ -17,12 +17,12 @@ public class Holiday {
 		this.coming = true;
 	}
 
-	public Holiday(int id, String destination, User user, int budget, List<Activity> activities, boolean coming) {
+	public Holiday(int id, String destination, User user, int budget, List<Activity> activities) {
 		this.destination = destination;
 		this.budget = budget;
 		this.user = user;
 		this.activities = activities;
-		this.coming = coming;
+		this.coming = true;
 	}
 
 	public void addActivity(Activity activity) {

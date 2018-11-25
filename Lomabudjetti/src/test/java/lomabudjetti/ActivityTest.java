@@ -5,6 +5,8 @@
  */
 package lomabudjetti;
 
+import lomabudjetti.domain.*;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,32 +15,42 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ActivityTest {
-    
-    Activity activity;
 
-    public ActivityTest() {
-    }
+	Activity activity;
+	Holiday holiday;
+	User user;
 
-    @Before
+	public ActivityTest() {
+	}
+
+	@Before
     public void setUp() {
-        activity = new Activity("Jet-Ski", 50, 6);
-    }
-    
-    @Test
-    public void priorityNumberIsCorrect() {
-        assertEquals(6, activity.getPriorityNumber());
-    }
-    
-    @Test
-    public void priorityNumberIsCorrectWhenItShouldBeZero() {
-        activity.setPriorityNumber(392);
-        assertEquals(0, activity.getPriorityNumber());
+		user = new User("Mike");
+    	holiday = new Holiday("Paris", user);
+        activity = new Activity("Eiffeil", holiday);
+        activity = new Activity("Eiffel tower", 50, 7, holiday);
     }
 
+	@Test
+	public void priorityNumberIsCorrect() {
+		assertEquals(7, activity.getPriorityNumber());
+	}
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+	@Test
+	public void priorityNumberIsCorrectWhenTryToSetItHigherThanTen() {
+		activity.setPriorityNumber(392);
+		assertEquals(0, activity.getPriorityNumber());
+	}
+	
+	@Test
+	public void setPriceGivesNewPriceForActivity() {
+		activity.setPrice(30);
+		assertEquals(30, activity.getPrice());
+	}
+
+	// TODO add test methods here.
+	// The methods must be annotated with annotation @Test. For example:
+	//
+	// @Test
+	// public void hello() {}
 }

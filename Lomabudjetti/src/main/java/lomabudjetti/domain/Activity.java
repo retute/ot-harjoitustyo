@@ -7,8 +7,13 @@ public class Activity {
     private int priorityNumber;
     private Holiday holiday;
     
-    public Activity(String name, int price, int priority, Holiday holiday) {
-        this.name = name;
+    public Activity(String activity, Holiday holiday) {
+    	this.name = activity;
+    	this.holiday = holiday;
+    }
+    
+    public Activity(String activity, int price, int priority, Holiday holiday) {
+        this.name = activity;
         this.price = price;
         this.holiday = holiday;
         
@@ -17,25 +22,8 @@ public class Activity {
         } else {
             this.priorityNumber = 0;
         }
-    }
+    }    
     
-    public Activity(String activity, Holiday holiday) {
-    	this.name = activity;
-    	this.holiday = holiday;
-    }
-    
-//    public void setName(String name) {
-//    	this.name = name;
-//    }
-    
-//    public void setPriorityNumber(int number) {
-//    	if (number > 0 && number <= 10) {
-//    		this.priorityNumber = number;
-//    	} else {
-//    		this.priorityNumber = 0;
-//    	}
-//    }
-     
     public String getName() {
     	return this.name;
     }
@@ -44,8 +32,20 @@ public class Activity {
     	return this.price;
     }
     
+    public void setPrice(int price) {
+    	this.price = price;
+    }
+    
     public int getPriorityNumber() {
         return this.priorityNumber;
+    }
+    
+    public void setPriorityNumber(int number) {
+    	if (number > 0 && number <= 10) {
+    		this.priorityNumber = number;
+    	} else {
+    		this.priorityNumber = 0;
+    	}
     }
      
     
