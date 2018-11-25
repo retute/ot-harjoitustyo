@@ -7,7 +7,7 @@ Käyttöohje
 
 [Vaativuusmäärittely](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/maarittelydokumentti.md)
 
-Arkkitehtuuri
+[Arkkitehtuuri](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/arkkitehtuuri.md)
 
 Testausdokumentti
 
