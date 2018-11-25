@@ -1,4 +1,4 @@
-package lomabudjetti;
+package lomabudjetti.domain;
 
 public class Activity {
     
@@ -17,17 +17,17 @@ public class Activity {
         }
     }
     
-    public void setName(String name) {
-    	this.name = name;
-    }
+//    public void setName(String name) {
+//    	this.name = name;
+//    }
     
-    public void setPriorityNumber(int number) {
-    	if (number > 0 && number <= 10) {
-    		this.priorityNumber = number;
-    	} else {
-    		this.priorityNumber = 0;
-    	}
-    }
+//    public void setPriorityNumber(int number) {
+//    	if (number > 0 && number <= 10) {
+//    		this.priorityNumber = number;
+//    	} else {
+//    		this.priorityNumber = 0;
+//    	}
+//    }
      
     public String getName() {
     	return this.name;
