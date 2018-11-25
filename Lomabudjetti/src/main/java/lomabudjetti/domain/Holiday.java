@@ -11,24 +11,18 @@ public class Holiday {
 	private boolean coming;
 	private int id;
 
-	public Holiday(int id, String destination, User user) {
-		this.destination = destination;
-		this.user = user;
-		this.id = id;
-	}
-
 	public Holiday(String destination, User user) {
 		this.destination = destination;
 		this.user = user;
 		this.coming = true;
 	}
 
-	public Holiday(int id, String destination, User user, int budget, List<Activity> activities) {
+	public Holiday(int id, String destination, User user, int budget, List<Activity> activities, boolean coming) {
 		this.destination = destination;
 		this.budget = budget;
 		this.user = user;
 		this.activities = activities;
-		this.coming = true;
+		this.coming = coming;
 	}
 
 	public void addActivity(Activity activity) {
@@ -54,17 +48,33 @@ public class Holiday {
 	public int getBudget() {
 		return this.budget;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	public boolean isComing() {
+		return coming;
+	}
+	
+	public void setNotComing() {
+		this.coming = false;
+	}
+	
 //	public String toString() {
 //		return "Destination: " + this.destination + ", Budget: " + this.budget;
 //	}
 
-	public void crowBudget(int more) {
-		this.budget += more;
-	}
-
-	public void decreaseBudget(int less) {
-		this.budget -= less;
-	}
+//	public void crowBudget(int more) {
+//		this.budget += more;
+//	}
+//
+//	public void decreaseBudget(int less) {
+//		this.budget -= less;
+//	}
 
 }

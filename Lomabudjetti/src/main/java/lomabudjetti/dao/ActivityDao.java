@@ -1,5 +1,10 @@
 package lomabudjetti.dao;
 
-public class ActivityDao {
+import lomabudjetti.domain.*;
+import java.util.*;
 
+public interface ActivityDao {
+	Activity create(Activity activity) throws Exception;
+	
+	List<Activity> getAll();
 }

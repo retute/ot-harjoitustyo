@@ -5,6 +5,7 @@ public class Activity {
     private String name;
     private int price;
     private int priorityNumber;
+    private Holiday holiday;
     
     public Activity(String name, int price, int priority) {
         this.name = name;
@@ -15,6 +16,11 @@ public class Activity {
         } else {
             this.priorityNumber = 0;
         }
+    }
+    
+    public Activity(String activity, Holiday holiday) {
+    	this.name = activity;
+    	this.holiday = holiday;
     }
     
 //    public void setName(String name) {

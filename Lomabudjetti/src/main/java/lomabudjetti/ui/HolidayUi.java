@@ -5,27 +5,35 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.*;
+import java.util.*;
+import javafx.scene.Scene;
 
 public class HolidayUi extends Application {
 	
 	private HolidayService hs;
+	
+	private Scene holidayScene;
+	private Scene logInScene;
+	private Scene newUserScene;
+	private Scene activityScene;
+	
+	public Node createHoliday(Holiday holiday) {
+		HBox box = new HBox(10);
+		
+		return null;
+	}
+	
 
 	@Override
-	public void start(Stage window) throws Exception {
-		Button logIn = new Button("Log In");
-		Button createAccount = new Button("Create Account");
-		Label text = new Label("Lomabudjetti");
+	public void start(Stage stage) throws Exception {
+		VBox login = new VBox(10);
+		HBox input = new HBox(10);
 		
-		BorderPane components = new BorderPane();
-		components.setTop(text);
-		components.setLeft(logIn);
-		components.setRight(createAccount);	
-		
-		Scene view = new Scene(components);
-		
-		window.setScene(view);
-		window.show();
-		
+	}
+	
+	@Override
+	public void stop() {
+		System.out.println("Bye!");
 	}
 	
     public static void main(String[] args) {
