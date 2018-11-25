@@ -7,9 +7,10 @@ public class Activity {
     private int priorityNumber;
     private Holiday holiday;
     
-    public Activity(String name, int price, int priority) {
+    public Activity(String name, int price, int priority, Holiday holiday) {
         this.name = name;
         this.price = price;
+        this.holiday = holiday;
         
         if (priority > 0 && priority <= 10) {
             this.priorityNumber = priority;

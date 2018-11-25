@@ -12,10 +12,10 @@ public class HolidayUi extends Application {
 	
 	private HolidayService hs;
 	
-	private Scene holidayScene;
-	private Scene logInScene;
-	private Scene newUserScene;
-	private Scene activityScene;
+	private Scene holidayScene; //list of holidays
+	private Scene logInScene; //log in page
+	private Scene newUserScene;	//create a new user page
+	private Scene activityScene;	//holiday's activity list
 	
 	public Node createHoliday(Holiday holiday) {
 		HBox box = new HBox(10);
