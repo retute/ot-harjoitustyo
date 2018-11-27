@@ -10,3 +10,4 @@ Päivä | Aika | Mitä tein
 20.11. | 4 | Luokkien metodien lisäily ja testien aloittaminen
 23.11. | 2 | Luokkien muokkausta
 25.11. | 5 | Testien lisäilyä, arkkitehtuuriin luokkakaavio, luokkien siistimistä
+26.11. | 2 | Jacoco:reportin onnitumisen yrittämistä
