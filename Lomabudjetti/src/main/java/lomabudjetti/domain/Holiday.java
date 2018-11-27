@@ -11,11 +11,13 @@ public class Holiday {
 	private User user;
 	private boolean coming;
 	private int id;
+	private int activitiesCost;
 
 	public Holiday(String destination, User user) {
 		this.destination = destination;
 		this.user = user;
 		this.coming = true;
+		this.activitiesCost = 0;
 	}
 
 	public Holiday(int id, String destination, User user, int budget, List<Activity> activities) {
@@ -24,6 +26,7 @@ public class Holiday {
 		this.user = user;
 		this.activities = activities;
 		this.coming = true;
+		this.activitiesCost = 0;
 	}
 
 	public void addActivity(Activity activity) {
@@ -64,6 +67,21 @@ public class Holiday {
 	
 	public void setNotComing() {
 		this.coming = false;
+	}
+	
+	public int checkCostOfActivities() {
+		for(int i = 0; i < this.activities.size(); i++) {
+			this.activitiesCost += this.activities.get(i).getPrice();
+		}
+		
+		return this.activitiesCost;
+	}
+	
+	public boolean moneyForTheActivity(Activity activity) {
+		if (budget - activity.getPrice() < 0) {
+			return false;
+		}
+		return true;
 	}
 	
 //	public String toString() {

@@ -30,7 +30,7 @@ public class HolidayService {
     	return true;
     }
     
-    public boolean createActivity(String name) {
+    public boolean planActivity(String name) {
     	Activity activity = new Activity(name, holiday);
     	try {
     		activityDao.create(activity);
