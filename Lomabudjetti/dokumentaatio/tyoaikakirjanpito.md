@@ -11,3 +11,6 @@ Päivä | Aika | Mitä tein
 23.11. | 2 | Luokkien muokkausta
 25.11. | 5 | Testien lisäilyä, arkkitehtuuriin luokkakaavio, luokkien siistimistä
 26.11. | 2 | Jacoco:reportin onnitumisen yrittämistä
+27.11. | 2 | Testien lisäilyä ja jacoco:report kampuksella toimintaan
+
+Yhteensä 21

@@ -1,5 +1,4 @@
 package lomabudjetti;
-
 import lomabudjetti.domain.*;
 
 import org.junit.After;
@@ -15,7 +14,11 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        
+    	user = new User("Alex");
     }
 
+    @Test
+    public void getUsernameGivesGivesTheCorrecctName() {
+    	assertEquals("Alex", user.getUsername());
+    }
 }
