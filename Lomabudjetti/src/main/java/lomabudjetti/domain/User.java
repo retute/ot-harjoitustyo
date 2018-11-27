@@ -25,4 +25,8 @@ public class User {
     	this.holidays = list;
     }
     
+    public List<Holiday> getHolidays() {
+    	return this.holidays;
+    }
+    
 }

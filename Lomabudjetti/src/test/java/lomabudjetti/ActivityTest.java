@@ -27,7 +27,6 @@ public class ActivityTest {
     public void setUp() {
 		user = new User("Mike");
     	holiday = new Holiday("Paris", user);
-        activity = new Activity("Eiffeil", holiday);
         activity = new Activity("Eiffel tower", 50, 7, holiday);
     }
 

@@ -1,6 +1,8 @@
 package lomabudjetti.dao;
+import java.util.List;
+
 import lomabudjetti.domain.*;
-import java.util.*;
+import lomabudjetti.domain.Holiday;
 
 public interface HolidayDao {
 

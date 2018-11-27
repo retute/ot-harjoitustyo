@@ -1,6 +1,10 @@
 
 package lomabudjetti.domain;
-import lomabudjetti.dao.*;
+
+import lomabudjetti.dao.ActivityDao;
+import lomabudjetti.dao.HolidayDao;
+import lomabudjetti.dao.UserDao;
+
 
 public class HolidayService {
     
@@ -9,11 +13,11 @@ public class HolidayService {
 	private HolidayDao holidayDao;
 	private User user;
 	private Holiday holiday;
-    
-    public HolidayService(UserDao userDao, HolidayDao holidayDao) {
+
+    public HolidayService(UserDao userDao, HolidayDao holidayDao, ActivityDao activityDao) {
         this.userDao = userDao;
         this.holidayDao = holidayDao;
-        
+        this.activityDao = activityDao;
     }
     
     public boolean planHoliday(String destination) {

@@ -2,6 +2,7 @@
 package lomabudjetti.domain;
 import java.util.List;
 
+
 public class Holiday {
 
 	private String destination;

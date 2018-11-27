@@ -1,6 +1,6 @@
 package lomabudjetti.dao;
 
-import lomabudjetti.domain.*;
+import lomabudjetti.domain.Activity;;
 import java.util.*;
 
 public interface ActivityDao {

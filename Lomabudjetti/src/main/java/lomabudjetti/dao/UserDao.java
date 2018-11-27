@@ -1,7 +1,7 @@
 
 package lomabudjetti.dao;
 
-import lomabudjetti.domain.*;
+import lomabudjetti.domain.User;
 import java.util.*;
 
 public interface UserDao {
