@@ -1,5 +1,5 @@
 
-package lomabudjetti.domain.*;
+package lomabudjetti.domain;
 import lomabudjetti.dao.*;
 
 public class HolidayService {
