@@ -54,7 +54,18 @@ public class HolidayService {
     	}
     }
     
-    public User getLoggedinUser() {
+    public boolean login(String username) {
+    	
+    	User check = userDao.findByUsername(username);
+    	if(check == null) {
+    		return false;
+    	}
+    	user = check;
+    	
+    	return true;
+    }
+    
+    public User getLoggedUser() {
     	return user;
     }
     
