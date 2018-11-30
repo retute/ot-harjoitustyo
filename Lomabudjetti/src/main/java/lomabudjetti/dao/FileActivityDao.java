@@ -18,9 +18,17 @@ public class FileActivityDao {
 	
 	public Activity plan(Activity activity) {
 		activity.setId(giveId());
-		activities.add(activity);
 		
+		if (activity.getHoliday().getBudget() -activity.getPrice() >= 0) {
+			activities.add(activity);
+		}
 		return activity;
+	}
+	
+	public void cancelActivity(Activity activity) {
+		if (activities.contains(activity)) {
+			activities.remove(activity);	
+		}
 	}
 
 	public List<Activity> getAll() {

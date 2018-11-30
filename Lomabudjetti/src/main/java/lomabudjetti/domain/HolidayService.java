@@ -30,6 +30,7 @@ public class HolidayService {
     	return true;
     }
     
+    //creates activity, if the holiday budget is enough
     public boolean planActivity(String name) {
     	Activity activity = new Activity(name, holiday);
     	try {
@@ -40,6 +41,7 @@ public class HolidayService {
     	return true;
     }
     
+    //creates user if the username doesn't exist already
     public boolean createUser(String username) {
     	if (userDao.findByUsername(username) == null) {
     		User user = new User(username);
@@ -54,17 +56,17 @@ public class HolidayService {
     	}
     }
     
+    //login: if username does exist then true and loging, other way false 
     public boolean login(String username) {
-    	
     	User check = userDao.findByUsername(username);
     	if(check == null) {
     		return false;
     	}
     	user = check;
-    	
     	return true;
     }
     
+    //returns user that is logged in
     public User getLoggedUser() {
     	return user;
     }

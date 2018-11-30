@@ -46,6 +46,10 @@ public class Activity {
     	this.price = price;
     }
     
+    public Holiday getHoliday() {
+    	return this.holiday;
+    }
+    
 //    public int getPriorityNumber() {
 //        return this.priorityNumber;
 //    }
