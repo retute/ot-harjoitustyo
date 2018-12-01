@@ -1,6 +1,8 @@
 
 package lomabudjetti.domain;
 
+import java.util.List;
+
 import lomabudjetti.dao.ActivityDao;
 import lomabudjetti.dao.HolidayDao;
 import lomabudjetti.dao.UserDao;
@@ -20,6 +22,7 @@ public class HolidayService {
         this.activityDao = activityDao;
     }
     
+    //add new holiday for the user logged in
     public boolean planHoliday(String destination) {
     	Holiday holiday = new Holiday(destination, user);
     	try {
@@ -28,6 +31,11 @@ public class HolidayService {
     		return false;
     	}
     	return true;
+    }
+    
+    // get user's all holidays
+    public List<Holiday> getHolidays() {
+    	return holidayDao.getAll();
     }
     
     //creates activity, if the holiday budget is enough
@@ -39,6 +47,11 @@ public class HolidayService {
     		return false;
     	}
     	return true;
+    }
+    
+    // get holiday's all activities
+    public List<Activity> getActivities() {
+    	return activityDao.getAll();
     }
     
     //creates user if the username doesn't exist already

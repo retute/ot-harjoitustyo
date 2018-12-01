@@ -1,4 +1,4 @@
-package lomabudjetti;
+package lomabudjetti.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 

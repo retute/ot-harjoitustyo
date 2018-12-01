@@ -1,4 +1,4 @@
-package lomabudjetti;
+package lomabudjetti.domain;
 import lomabudjetti.domain.*;
 import java.util.*;
 

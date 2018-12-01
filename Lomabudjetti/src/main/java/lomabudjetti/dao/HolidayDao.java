@@ -10,5 +10,5 @@ public interface HolidayDao {
 	
 	List<Holiday> getAll();
 	
-	void setPast(int id) throws Exception;
+	// void setPast(int id) throws Exception;
 }
