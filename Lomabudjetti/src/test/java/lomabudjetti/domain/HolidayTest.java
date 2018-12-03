@@ -23,7 +23,7 @@ public class HolidayTest {
 	}
 	
 	@Test
-	public void holidayBudgetCorrect() {
+	public void holidayBudgetIsCorrect() {
 		holiday.setBudget(1000);
 		assertEquals(1000, holiday.getBudget());
 	}
@@ -39,7 +39,7 @@ public class HolidayTest {
 	}
 	
 	@Test
-	public void holidayActivitiesAreCorrect() {
+	public void holidaySetActivitiesAreCorrect() {
 		Activity ac = new Activity("JetSki", holiday);
 		Activity act = new Activity("Snorkling", holiday);
 		List<Activity> list = new ArrayList<>();
@@ -51,4 +51,5 @@ public class HolidayTest {
 		
 		assertEquals(list, holiday.getActivities());
 	}
+	
 }

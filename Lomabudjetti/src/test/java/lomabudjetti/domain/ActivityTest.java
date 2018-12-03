@@ -7,10 +7,7 @@ package lomabudjetti.domain;
 
 import lomabudjetti.domain.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -27,7 +24,7 @@ public class ActivityTest {
     public void setUp() {
 		user = new User("Mike");
     	holiday = new Holiday("Paris", user);
-//        activity = new Activity(activity.getId(), "Eiffel tower", 50, 7, holiday);
+        activity = new Activity("Sleep", holiday);
     }
 
 //	@Test
@@ -45,6 +42,11 @@ public class ActivityTest {
 	public void setPriceGivesNewPriceForActivity() {
 		activity.setPrice(30);
 		assertEquals(30, activity.getPrice());
+	}
+	
+	@Test
+	public void getHolidayWorks() {
+		assertEquals(this.holiday, activity.getHoliday());
 	}
 
 	// TODO add test methods here.
