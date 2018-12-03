@@ -2,7 +2,6 @@ package lomabudjetti.dao;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 import lomabudjetti.domain.User;
@@ -29,12 +28,6 @@ public class FileUserDao implements UserDao {
 			writeTxt.close();
 		}
 	}
-
-	@Override
-	public User create(User user) {
-		userList.add(user);
-		return user;
-	}
 	
 	private void save() throws Exception {
 		try (FileWriter writer  = new FileWriter(new File(this.file))) {
@@ -53,6 +46,13 @@ public class FileUserDao implements UserDao {
 	@Override
 	public List<User> getAll() {
 		return this.userList;
+	}
+	
+	@Override
+	public User create(User user) throws Exception{
+		userList.add(user);
+		save();
+		return user;
 	}
 
 }

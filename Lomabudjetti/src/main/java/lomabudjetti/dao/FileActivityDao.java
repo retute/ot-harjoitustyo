@@ -1,15 +1,36 @@
 package lomabudjetti.dao;
 
 import lomabudjetti.domain.Activity;
+import lomabudjetti.domain.Holiday;
+import lomabudjetti.domain.User;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 public class FileActivityDao implements ActivityDao {
 	
-	List<Activity> activities;
+	public List<Activity> activities;
+	private String file;
 	
-	public FileActivityDao() throws Exception {
+	public FileActivityDao(String file, HolidayDao holidayDao) throws Exception {
 		this.activities = new ArrayList<>();
+		this.file = file;
+		
+//        try {
+//            Scanner reader = new Scanner(new File(file));
+//            while (reader.hasNextLine()) {
+//                String[] parts = reader.nextLine().split(";");
+//                int id = Integer.parseInt(parts[0]);
+//                boolean done = Boolean.parseBoolean(parts[2]);
+//                Holiday holiday = holidayDao.getAll().stream().filter(u->u.getUsername().equals(parts[5])).findFirst().orElse(null); 
+//                Activity activity = new Activity(id, , done, user);
+//                todos.add(todo);
+//            }
+//        } catch (Exception e) {
+//            FileWriter writer = new FileWriter(new File(file));
+//            writer.close();
+//        }
 	}
 	
 	private int giveId() {

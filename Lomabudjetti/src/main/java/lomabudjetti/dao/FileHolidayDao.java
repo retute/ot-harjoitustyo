@@ -7,9 +7,11 @@ import lomabudjetti.domain.Holiday;
 public class FileHolidayDao implements HolidayDao {
 	
 	public List<Holiday> holidays;
+	private String file;
 	
-	public FileHolidayDao() throws Exception {
+	public FileHolidayDao(String file, UserDao user) throws Exception {
 		this.holidays = new ArrayList<>();
+		this.file = file;
 	}
 	
 	private int giveId() {

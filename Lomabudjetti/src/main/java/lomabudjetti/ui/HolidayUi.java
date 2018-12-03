@@ -1,5 +1,8 @@
 package lomabudjetti.ui;
 
+import lomabudjetti.dao.FileActivityDao;
+import lomabudjetti.dao.FileHolidayDao;
+import lomabudjetti.dao.FileUserDao;
 import lomabudjetti.domain.*;
 import javafx.application.*;
 import javafx.stage.Stage;
@@ -7,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.*;
 import javafx.geometry.*;
+
+import java.io.FileInputStream;
 import java.util.*;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -17,10 +22,28 @@ public class HolidayUi extends Application {
 	private HolidayService hs;
 
 	private Scene holidayScene; // list of holidays
+	private Scene newHolidayScene;
 	private Scene loginScene; // log in page
 	private Scene newUserScene; // create a new user page
 	private Scene activityScene; // holiday's activity list
 	private Label begin = new Label();
+	
+	@Override
+	public void init() throws Exception {
+        Properties properties = new Properties();
+//
+        properties.load(new FileInputStream("config.properties"));
+//        
+//        String userFile = properties.getProperty("userFile");
+//        String holidayFile = properties.getProperty("holidayFile");
+//        String activityFile = properties.getProperty("activityFile");
+//
+//        FileUserDao userDao = new FileUserDao(userFile);
+//        FileHolidayDao holidayDao = new FileHolidayDao(holidayFile, userDao);
+//        FileActivityDao activityDao = new FileActivityDao(activityFile, holidayDao);
+//        
+//        hs = new HolidayService(userDao, holidayDao, activityDao);
+	}
 
 	public Node createHolidayNode(Holiday holiday) {
 		HBox box = new HBox(10);
@@ -94,7 +117,7 @@ public class HolidayUi extends Application {
 		BorderPane newUserbp = new BorderPane();
 
 		Label resultMsg = new Label();
-		resultMsg.setText("Messa");
+		resultMsg.setText("Message");
 
 		GridPane createUserGP = new GridPane();
 		createUserGP.setPadding(new Insets(10));
@@ -132,7 +155,7 @@ public class HolidayUi extends Application {
 
 		newUserScene = new Scene(newUserbp);
 
-		// show holidays scene
+		//SHOW HOLIDAYS SCENE
 		BorderPane bpHoliday = new BorderPane();
 
 		// menu buttonst to top of borderpane
@@ -151,7 +174,28 @@ public class HolidayUi extends Application {
 
 		ListView holidays = new ListView();
 
-		// create holiday scene
+		//CREATE HOLIDAY SCENE
+		BorderPane newHolidaybp = new BorderPane();
+
+		Label holiMsg = new Label();
+		resultMsg.setText("Message");
+
+		GridPane createHolidayGP = new GridPane();
+		createHolidayGP.setPadding(new Insets(10));
+		createHolidayGP.setVgap(5);
+		createHolidayGP.setHgap(5);
+
+		Label createHolidaylbl = new Label("Add new holiday");
+		TextField destination = new TextField();
+		TextField budget
+		Button newUserBtn = new Button("Create");
+		Button goBackBtn = new Button("Go Back");
+
+		createUserGP.add(createUser, 0, 1);
+		createUserGP.add(usernameInput, 0, 2);
+		createUserGP.add(newUserBtn, 0, 3);
+		createUserGP.add(goBackBtn, 2, 3);
+		createUserGP.add(resultMsg, 0, 0);
 
 		// show actions scene
 
