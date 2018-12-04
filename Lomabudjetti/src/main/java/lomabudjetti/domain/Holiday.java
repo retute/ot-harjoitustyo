@@ -27,6 +27,7 @@ public class Holiday {
 		this.activities = activities;
 		this.coming = true;
 		this.activitiesCost = 0;
+                this.id = id;
 	}
 
 	public void addActivity(Activity activity) {

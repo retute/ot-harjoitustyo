@@ -1,19 +1,18 @@
 package lomabudjetti.dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+public class FileActivityDaoTest {
 
-class FileActivityDaoTest {
-
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 	}
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+//
+//	@Test
+//	public void test() {
+//		fail("Not yet implemented");
+//	}
 
 }
