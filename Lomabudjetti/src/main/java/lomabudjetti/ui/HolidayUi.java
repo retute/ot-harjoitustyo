@@ -21,7 +21,8 @@ public class HolidayUi extends Application {
 
 	private HolidayService hs;
 
-	private Scene holidayScene; // list of holidays
+	private Scene holidayScene; 
+	private Scene allHolidays; // list of holidays
 	private Scene newHolidayScene;
 	private Scene loginScene; // log in page
 	private Scene newUserScene; // create a new user page
@@ -33,35 +34,35 @@ public class HolidayUi extends Application {
         Properties properties = new Properties();
 //
         properties.load(new FileInputStream("config.properties"));
-//        
-//        String userFile = properties.getProperty("userFile");
-//        String holidayFile = properties.getProperty("holidayFile");
-//        String activityFile = properties.getProperty("activityFile");
+        
+        String userFile = properties.getProperty("userFile");
+        String holidayFile = properties.getProperty("holidayFile");
+        String activityFile = properties.getProperty("activityFile");
+
+        FileUserDao userDao = new FileUserDao(userFile);
+        FileHolidayDao holidayDao = new FileHolidayDao(holidayFile, userDao);
+        FileActivityDao activityDao = new FileActivityDao(activityFile, holidayDao);
+        
+        hs = new HolidayService(userDao, holidayDao, activityDao);
+	}
+
+//	public Node createHolidayNode(Holiday holiday) {
+//		HBox box = new HBox(10);
+//		Label label = new Label(holiday.getDestination());
+//		Button deleteHoliday = new Button("Delete");
+//		Button showHoliday = new Button("Show");
 //
-//        FileUserDao userDao = new FileUserDao(userFile);
-//        FileHolidayDao holidayDao = new FileHolidayDao(holidayFile, userDao);
-//        FileActivityDao activityDao = new FileActivityDao(activityFile, holidayDao);
-//        
-//        hs = new HolidayService(userDao, holidayDao, activityDao);
-	}
-
-	public Node createHolidayNode(Holiday holiday) {
-		HBox box = new HBox(10);
-		Label label = new Label(holiday.getDestination());
-		Button deleteHoliday = new Button("Delete");
-		Button showHoliday = new Button("Show");
-
-		deleteHoliday.setOnAction(e -> {
-			hs.getHolidays().remove(holiday.getId());
-		});
-		showHoliday.setOnAction(e -> {
-			holiday.getActivities();
-		});
-
-		box.setPadding(new Insets(0, 5, 0, 5));
-		box.getChildren().addAll(label, deleteHoliday);
-		return box;
-	}
+//		deleteHoliday.setOnAction(e -> {
+//			hs.getHolidays().remove(holiday.getId());
+//		});
+//		showHoliday.setOnAction(e -> {
+//			
+//		});
+//
+//		box.setPadding(new Insets(0, 5, 0, 5));
+//		box.getChildren().addAll(label, deleteHoliday);
+//		return box;
+//	}
 
 	public Node createActvityNode(Activity activity) {
 
@@ -100,12 +101,15 @@ public class HolidayUi extends Application {
 		btnLogin.setOnAction(e -> {
 			String username = loginInput.getText();
 			if (hs.login(username)) {
+				this.hs.login(username);
 				stage.setTitle("User: " + username);
 				stage.setScene(holidayScene);
-				this.hs.login(username);
+				userMessage.setText("");
+				loginInput.setText("");
 			} else {
 				stage.setScene(newUserScene);
 				userMessage.setText("Username does not exist, try again or create a new one");
+				loginInput.setText("");
 			}
 		});
 
@@ -120,9 +124,9 @@ public class HolidayUi extends Application {
 		resultMsg.setText("Message");
 
 		GridPane createUserGP = new GridPane();
-		createUserGP.setPadding(new Insets(10));
-		createUserGP.setVgap(5);
-		createUserGP.setHgap(5);
+		createUserGP.setPadding(new Insets(20));
+		createUserGP.setVgap(10);
+		createUserGP.setHgap(20);
 
 		Label createUser = new Label("Write username, min. 4 letters");
 		TextField usernameInput = new TextField();
@@ -142,7 +146,7 @@ public class HolidayUi extends Application {
 				resultMsg.setText("Username is too short, try again");
 				stage.setScene(newUserScene);
 			} else if (hs.createUser(username)) {
-				userMessage.setText("Created new user, now login!");
+				userMessage.setText("New user created successfully, now login!");
 				stage.setScene(loginScene);
 			} else {
 				resultMsg.setText("Username isn't available, try again.");
@@ -156,47 +160,63 @@ public class HolidayUi extends Application {
 		newUserScene = new Scene(newUserbp);
 
 		//SHOW HOLIDAYS SCENE
-		BorderPane bpHoliday = new BorderPane();
+		BorderPane allHolidaybp = new BorderPane();
 
 		// menu buttonst to top of borderpane
 		HBox menuHolidayPage = new HBox(10);
 		Button logout = new Button("Log out");
-		// text input to create new holiday and button for that
 		Button createHoliday = new Button("Add new");
 		menuHolidayPage.getChildren().addAll(logout, createHoliday);
-		bpHoliday.setTop(menuHolidayPage);
+		allHolidaybp.setTop(menuHolidayPage);
+		
 		logout.setOnAction(e -> {
 			stage.setScene(loginScene);
+			userMessage.setText("Logged out successfully!");
 			this.hs.logOut();
+			userMessage.setText("");
 		});
+		createHoliday.setOnAction(e-> {
+			stage.setScene(newHolidayScene);
+		});
+		
 		GridPane holidaysGP = new GridPane();
 		holidaysGP.setPadding(new Insets(10));
+		holidaysGP.setVgap(10);
+		holidaysGP.setHgap(10);
+		
+//		ListView holidays = new ListView();
+//		allHolidaybp.setCenter(holidays);
 
-		ListView holidays = new ListView();
-
+		
+		
+		holidayScene = new Scene(allHolidaybp);
+//
 		//CREATE HOLIDAY SCENE
-		BorderPane newHolidaybp = new BorderPane();
+//		BorderPane newHolidaybp = new BorderPane();
+////
+//		Label holiMsg = new Label();
+//		resultMsg.setText("Message");
+////
+//		GridPane createHolidayGP = new GridPane();
+//		createHolidayGP.setPadding(new Insets(10));
+//		createHolidayGP.setVgap(5);
+//		createHolidayGP.setHgap(5);
+//		
+//		
+//
+//		Label createHolidaylbl = new Label("Add new holiday");
+//		TextField destination = new TextField();
+//		TextField budget = new TextField();
+//		Button newHolidayBtn = new Button("Create");
+//		Button showHolidaysBtn = new Button("Go Back");
+//
+//		createUserGP.add(createHolidaylbl, 0, 1);
+//		createUserGP.add(destination, 0, 2);
+//		createUserGP.add(budget, 0, 3);
+//		createUserGP.add(newHolidayBtn, 2, 3);
+//		createUserGP.add(sho, 0, 0);
 
-		Label holiMsg = new Label();
-		resultMsg.setText("Message");
-
-		GridPane createHolidayGP = new GridPane();
-		createHolidayGP.setPadding(new Insets(10));
-		createHolidayGP.setVgap(5);
-		createHolidayGP.setHgap(5);
-
-		Label createHolidaylbl = new Label("Add new holiday");
-		TextField destination = new TextField();
-		TextField budget
-		Button newUserBtn = new Button("Create");
-		Button goBackBtn = new Button("Go Back");
-
-		createUserGP.add(createUser, 0, 1);
-		createUserGP.add(usernameInput, 0, 2);
-		createUserGP.add(newUserBtn, 0, 3);
-		createUserGP.add(goBackBtn, 2, 3);
-		createUserGP.add(resultMsg, 0, 0);
-
+		
 		// show actions scene
 
 		// create action scene
