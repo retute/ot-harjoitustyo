@@ -28,4 +28,8 @@ public class User {
     	return this.holidays;
     }
     
+    public String getHoliday(int i) {
+    	return holidays.get(i).getDestination();
+    }
+    
 }

@@ -1,6 +1,7 @@
 
 package lomabudjetti.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lomabudjetti.dao.ActivityDao;
@@ -47,6 +48,14 @@ public class HolidayService {
     		return false;
     	}
     	return true;
+    }
+    
+    public List<String> getDestinations() {
+    	List<String> destinations = new ArrayList<>();
+    	for(int i = 0; i < this.holidayDao.getAll().size(); i++) {
+    		destinations.add(user.getHoliday(i));
+    	}
+    	return destinations;
     }
     
     // get holiday's all activities

@@ -5,6 +5,8 @@ import lomabudjetti.dao.FileHolidayDao;
 import lomabudjetti.dao.FileUserDao;
 import lomabudjetti.domain.*;
 import javafx.application.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -160,7 +162,9 @@ public class HolidayUi extends Application {
 		newUserScene = new Scene(newUserbp);
 
 		//SHOW HOLIDAYS SCENE
-		BorderPane allHolidaybp = new BorderPane();
+		ScrollPane holidayScroll = new ScrollPane();
+		BorderPane allHolidaybp = new BorderPane(holidayScroll);
+		holidayScene = new Scene(allHolidaybp, 200, 250);
 
 		// menu buttonst to top of borderpane
 		HBox menuHolidayPage = new HBox(10);
@@ -184,14 +188,14 @@ public class HolidayUi extends Application {
 		holidaysGP.setVgap(10);
 		holidaysGP.setHgap(10);
 		
-//		ListView holidays = new ListView();
+		
+				
+		ListView<String> holidays = new ListView();
+		
+		
 //		allHolidaybp.setCenter(holidays);
 
-		
-		
-		holidayScene = new Scene(allHolidaybp);
-//
-		//CREATE HOLIDAY SCENE
+//		CREATE HOLIDAY SCENE
 //		BorderPane newHolidaybp = new BorderPane();
 ////
 //		Label holiMsg = new Label();
