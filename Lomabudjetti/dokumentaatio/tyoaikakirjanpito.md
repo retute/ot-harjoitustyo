@@ -12,5 +12,9 @@ Päivä | Aika | Mitä tein
 25.11. | 5 | Testien lisäilyä, arkkitehtuuriin luokkakaavio, luokkien siistimistä
 26.11. | 2 | Jacoco:reportin onnitumisen yrittämistä
 27.11. | 4 | Testien lisäilyä ja jacoco:report kampuksella toimintaan
+1.12. | 4 | Näkymän aloittaminen ja javafx-toiminnan kertaus
+2.12. | 2 | Näkymän luominen
+3.12. | 4 | Kirjautimisen onnistumisen toteutus
+4.12. | 3 | Scenejen luomista kirjautumisen jälkeen
 
 Yhteensä 23
