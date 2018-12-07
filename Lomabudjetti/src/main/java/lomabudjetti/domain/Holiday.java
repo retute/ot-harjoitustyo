@@ -13,8 +13,9 @@ public class Holiday {
 	private int id;
 	private int activitiesCost;
 
-	public Holiday(String destination, User user) {
+	public Holiday(String destination, int budget, User user) {
 		this.destination = destination;
+		this.budget = budget;
 		this.user = user;
 		this.coming = true;
 		this.activitiesCost = 0;

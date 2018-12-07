@@ -24,8 +24,8 @@ public class HolidayService {
     }
     
     //add new holiday for the user logged in
-    public boolean planHoliday(String destination) {
-    	Holiday holiday = new Holiday(destination, user);
+    public boolean planHoliday(String destination, int budget) {
+    	Holiday holiday = new Holiday(destination, budget, user);
     	try {
     		holidayDao.create(holiday);
     	} catch (Exception exception) {
