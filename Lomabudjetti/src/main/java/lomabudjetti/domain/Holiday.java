@@ -55,6 +55,10 @@ public class Holiday {
 		return this.budget;
 	}
 	
+	public User getUser() {
+		return this.user;
+	}
+	
 	public int getId() {
 		return id;
 	}
