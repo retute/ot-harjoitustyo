@@ -1,8 +1,6 @@
 package lomabudjetti.dao;
 
 import lomabudjetti.domain.Activity;
-import lomabudjetti.domain.Holiday;
-import lomabudjetti.domain.User;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,11 +9,11 @@ import java.util.Scanner;
 public class FileActivityDao implements ActivityDao {
 	
 	public List<Activity> activities;
-	private String file;
+//	private String file;
 	
 	public FileActivityDao(String file, HolidayDao holidayDao) throws Exception {
 		this.activities = new ArrayList<>();
-		this.file = file;
+//		this.file = file;
 		
 //        try {
 //            Scanner reader = new Scanner(new File(file));

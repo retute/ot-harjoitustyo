@@ -1,3 +1,6 @@
 Viro;500;terotero
 Korso;300;terotero
-Ruotsi;155;terotero
+Sörkkä;2;terotero
+Kiina;1000;terotero
+Vantaa;20;terotero
+Thaimaa;1300;terotero

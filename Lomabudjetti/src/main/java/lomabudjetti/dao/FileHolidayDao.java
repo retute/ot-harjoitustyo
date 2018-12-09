@@ -55,6 +55,11 @@ public class FileHolidayDao implements HolidayDao {
 	public List<Holiday> getAll() {
 		return holidays;
 	}
+	
+	@Override
+	public Holiday findByDestination(String destination) {
+		return holidays.stream().filter(h -> h.getDestination().equals(destination)).findFirst().orElse(null);
+	}
 
 	@Override
 	public Holiday create(Holiday holiday) throws Exception {
