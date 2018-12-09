@@ -1,1 +1,3 @@
-Viro;500;lomabudjetti.domain.User@51101f9f
+Viro;500;terotero
+Korso;300;terotero
+Ruotsi;155;terotero

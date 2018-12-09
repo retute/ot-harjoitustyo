@@ -30,7 +30,8 @@ public class HolidayUi extends Application {
 	private Scene loginScene; // log in page
 	private Scene newUserScene; // create a new user page
 	private Scene activityScene; // holiday's activity list
-	private Label begin = new Label();
+//	private Label begin = new Label();
+	private VBox holidayNodes;
 
 	@Override
 	public void init() throws Exception {
@@ -48,28 +49,31 @@ public class HolidayUi extends Application {
 
 		hs = new HolidayService(userDao, holidayDao, activityDao);
 	}
-
-//	public Node createHolidayNode(Holiday holiday) {
-//		HBox box = new HBox(10);
-//		Label label = new Label(holiday.getDestination());
-//		Button deleteHoliday = new Button("Delete");
-//		Button showHoliday = new Button("Show");
-//
-//		deleteHoliday.setOnAction(e -> {
-//			hs.getHolidays().remove(holiday.getId());
-//		});
-//		showHoliday.setOnAction(e -> {
-//			
-//		});
-//
-//		box.setPadding(new Insets(0, 5, 0, 5));
-//		box.getChildren().addAll(label, deleteHoliday);
-//		return box;
-//	}
-
-	public Node createActvityNode(Activity activity) {
-
-		return null;
+	
+	public Node planHolidayNode(Holiday hol) {
+		HBox holiBox = new HBox(10);
+		Label lbl = new Label(hol.getDestination());
+		lbl.setMinHeight(30);
+		Button btn = new Button("Cancel");
+		btn.setOnAction(e->{
+			hs.getHolidays().remove(hol);
+			getHolidaysAsList();
+		});
+		
+		Region reg = new Region();
+		HBox.setHgrow(reg, Priority.ALWAYS);
+		holiBox.setPadding(new Insets(0, 5, 0, 5));
+		
+		holiBox.getChildren().addAll(lbl, reg, btn);
+		return holiBox;
+	}
+	
+	public void getHolidaysAsList() {
+		holidayNodes.getChildren().clear();
+		List<Holiday> holidays = hs.getHolidays();
+		holidays.forEach(holiday->{
+			holidayNodes.getChildren().add(planHolidayNode(holiday));
+		});
 	}
 
 	@Override
@@ -78,7 +82,7 @@ public class HolidayUi extends Application {
 		stage.setHeight(250);
 		stage.setWidth(500);
 
-//		LLOGIN SCENE
+//		LOGIN SCENE
 		Label userMessage = new Label();
 		userMessage.setText("");
 		BorderPane loginbp = new BorderPane();
@@ -171,9 +175,10 @@ public class HolidayUi extends Application {
 
 		// menu buttonst to top of borderpane
 		HBox menuHolidayPage = new HBox(10);
+		Region reg = new Region();
 		Button logoutBtn = new Button("Log out");
 		Button createHoliday = new Button("Add new");
-		menuHolidayPage.getChildren().addAll(logoutBtn, createHoliday);
+		menuHolidayPage.getChildren().addAll(logoutBtn, reg, createHoliday);
 		allHolidaybp.setTop(menuHolidayPage);
 
 		logoutBtn.setOnAction(e -> {
@@ -185,15 +190,21 @@ public class HolidayUi extends Application {
 		createHoliday.setOnAction(e -> {
 			stage.setScene(newHolidayScene);
 		});
-
+		
+		holidayNodes = new VBox(10);
+		holidayNodes.setMaxHeight(300);
+		holidayNodes.setMaxWidth(300);
+		getHolidaysAsList();
+		
+		holidayScroll.setContent(holidayNodes);
+		
 		GridPane holidaysGP = new GridPane();
 		holidaysGP.setPadding(new Insets(10));
 		holidaysGP.setVgap(10);
 		holidaysGP.setHgap(10);
+		holidaysGP.add(holidayScroll, 1, 1);
 
-		ListView<String> holidays = new ListView();
-
-		allHolidaybp.setCenter(holidays);
+		allHolidaybp.setCenter(holidaysGP);
 
 //		CREATE HOLIDAY SCENE
 		BorderPane newHolidaybp = new BorderPane();
@@ -239,6 +250,7 @@ public class HolidayUi extends Application {
 					holiMsg.setText("Holiday plan added to the list.");
 					destination.setText("");
 					budget.setText("");
+					getHolidaysAsList();
 				} catch (NumberFormatException ex) {
 					budget.setText("");
 					holiMsg.setText("Give the budget as numbers.");
@@ -270,7 +282,7 @@ public class HolidayUi extends Application {
 
 	@Override
 	public void stop() {
-		System.out.println("Bye!");
+		System.out.println("Running stopped successfully!");
 	}
 
 	public static void main(String[] args) {

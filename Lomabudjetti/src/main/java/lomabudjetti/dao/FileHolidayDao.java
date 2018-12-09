@@ -41,7 +41,7 @@ public class FileHolidayDao implements HolidayDao {
 	private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Holiday holiday : holidays) {
-                writer.write(holiday.getDestination() + ";" + holiday.getBudget() + ";" + holiday.getUser() + "\n");
+                writer.write(holiday.getDestination() + ";" + holiday.getBudget() + ";" + holiday.getUser().getUsername() + "\n");
             }
         }
 	}
