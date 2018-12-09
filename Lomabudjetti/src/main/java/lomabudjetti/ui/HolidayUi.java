@@ -28,8 +28,12 @@ public class HolidayUi extends Application {
 	private Scene loginScene; // log in page
 	private Scene newUserScene; // create a new user page
 	private Scene activityScene; // holiday's activity list
+	
 	private VBox holidayNodes;
 	private Holiday holiday;
+	private Stage stage;
+	private Label userMsg;
+	private Button logout;
 
 	@Override
 	public void init() throws Exception {
@@ -65,6 +69,12 @@ public class HolidayUi extends Application {
 		holiBox.getChildren().addAll(lbl, reg, btn);
 		return holiBox;
 	}
+	
+	public Button logoutButton() {
+		this.logout = new Button("Log out");
+		logout.setOnAction(e-> this.stage.setScene(setLoginScene()));
+		return this.logout;
+	}
 
 	public void getHolidaysAsList() {
 		holidayNodes.getChildren().clear();
@@ -73,17 +83,13 @@ public class HolidayUi extends Application {
 			holidayNodes.getChildren().add(planHolidayNode(holiday));
 		});
 	}
-
-	@Override
-	public void start(Stage stage) throws Exception {
-		stage.setTitle("Holiday Budget");
-		stage.setHeight(250);
-		stage.setWidth(500);
-
+	
+	public Scene setLoginScene() {
 //		LOGIN SCENE
 		Label userMessage = new Label();
 		userMessage.setText("");
 		BorderPane loginbp = new BorderPane();
+		this.loginScene = new Scene(loginbp);
 
 		// Add GridPane
 		GridPane logingp = new GridPane();
@@ -95,8 +101,8 @@ public class HolidayUi extends Application {
 		Label lblUserName = new Label("Username");
 		TextField loginInput = new TextField();
 		Button btnLogin = new Button("Login");
-		Button btnCreate = new Button("Create Username");
-		btnCreate.setOnAction(e -> stage.setScene(newUserScene));
+		Button btnCreate = new Button("Sign in");
+		btnCreate.setOnAction(e -> stage.setScene(setSigninScene()));
 
 		// Add nodes to gp layout
 		logingp.add(lblUserName, 0, 0);
@@ -110,7 +116,7 @@ public class HolidayUi extends Application {
 			if (hs.login(username)) {
 				this.hs.login(username);
 				stage.setTitle("User: " + username);
-				stage.setScene(holidayScene);
+				stage.setScene(setHolidaylistScene());
 				userMessage.setText("");
 				loginInput.setText("");
 			} else {
@@ -122,9 +128,12 @@ public class HolidayUi extends Application {
 
 		loginbp.setTop(new Text("Holiday Budget Login"));
 		loginbp.setCenter(logingp);
-		this.loginScene = new Scene(loginbp);
-
-		// CREATE USER SCENE
+		
+		return this.loginScene;
+	}
+	
+	public Scene setSigninScene() {
+		this.userMsg = new Label();
 		BorderPane newUserbp = new BorderPane();
 
 		Label resultMsg = new Label();
@@ -151,10 +160,10 @@ public class HolidayUi extends Application {
 			String username = usernameInput.getText();
 			if (usernameInput.getText().length() <= 3) {
 				resultMsg.setText("Username is too short, try again");
-				stage.setScene(newUserScene);
+				stage.setScene(setSigninScene());
 			} else if (hs.createUser(username)) {
-				userMessage.setText("New user created successfully, now login!");
-				stage.setScene(loginScene);
+				userMsg.setText("New user created successfully, now login!");
+				stage.setScene(setLoginScene());
 			} else {
 				resultMsg.setText("Username isn't available, try again.");
 			}
@@ -165,13 +174,16 @@ public class HolidayUi extends Application {
 		newUserbp.setCenter(createUserGP);
 
 		newUserScene = new Scene(newUserbp);
+		
+		return this.newUserScene;
+	}
 
-		// SHOW HOLIDAYS SCENE
+	public Scene setHolidaylistScene() {
 		ScrollPane holidayScroll = new ScrollPane();
 		BorderPane allHolidaybp = new BorderPane(holidayScroll);
-		holidayScene = new Scene(allHolidaybp);
+		this.allHolidays = new Scene(allHolidaybp);
 		Label findResultMsg = new Label();
-		Label holiMsg = new Label();
+		userMsg = new Label();
 
 		// menu buttonst to top of borderpane
 		HBox menuHolidayPage = new HBox(10);
@@ -191,7 +203,7 @@ public class HolidayUi extends Application {
 		tryOpen.setOnAction(e -> {
 			String text = openHoliday.getText();
 			if (hs.findHoliday(text) != null) {
-				stage.setScene(activityScene);
+//				stage.setScene(setActivityScene());
 				this.holiday = hs.findHoliday(text);
 			} else {
 				findResultMsg.setTextFill(Color.RED);
@@ -200,15 +212,15 @@ public class HolidayUi extends Application {
 		});
 
 		logoutBtn.setOnAction(e -> {
-			stage.setScene(loginScene);
-			userMessage.setTextFill(Color.GREEN);
-			userMessage.setText("Logged out successfully!");
+			stage.setScene(setLoginScene());
+			this.userMsg.setTextFill(Color.GREEN);
+			this.userMsg.setText("Logged out successfully!");
 			this.hs.logOut();
 		});
 
 		createHoliday.setOnAction(e -> {
-			holiMsg.setText("");
-			stage.setScene(newHolidayScene);
+			userMsg.setText("");
+			stage.setScene(setNewholidayScene());
 		});
 
 		holidayNodes = new VBox(10);
@@ -217,23 +229,25 @@ public class HolidayUi extends Application {
 		getHolidaysAsList();
 
 		holidayScroll.setContent(holidayNodes);
-
 		allHolidaybp.setCenter(holidayScroll);
 
-//		CREATE HOLIDAY SCENE
+		return this.allHolidays;
+	}
+	
+	public Scene setNewholidayScene() {
 		BorderPane newHolidaybp = new BorderPane();
 		newHolidayScene = new Scene(newHolidaybp, 200, 250);
 		// menubox for "logout" and "go back" buttons
 		HBox menuBox = new HBox();
 		menuBox.setSpacing(10);
 		Button backHolidays = new Button("Back to Holidays");
-		backHolidays.setOnAction(e -> stage.setScene(holidayScene));
+		backHolidays.setOnAction(e -> stage.setScene(setHolidaylistScene()));
 		menuBox.setSpacing(10);
-		menuBox.getChildren().addAll(backHolidays, logoutBtn);
+		menuBox.getChildren().addAll(backHolidays, this.logout);
 
 		newHolidaybp.setTop(menuBox);
 
-		resultMsg.setText("Message");
+//		reMsg.setText("Message");
 
 		GridPane createHolidayGP = new GridPane();
 		createHolidayGP.setPadding(new Insets(10));
@@ -246,30 +260,28 @@ public class HolidayUi extends Application {
 		Label budgetlbl = new Label("Budget (only numbers)");
 		TextField budget = new TextField();
 		Button createHolidayBtn = new Button("Create");
-		Button showHolidaysBtn = new Button("Go Back");
 
 		createHolidayBtn.setOnAction(e -> {
 			if (destination.getText().isEmpty() || budget.getText().isEmpty()) {
-				holiMsg.setTextFill(Color.RED);
-				holiMsg.setText("Give the destination and the budget.");
+				userMsg.setTextFill(Color.RED);
+				userMsg.setText("Give the destination and the budget.");
 				destination.setText("");
 				budget.setText("");
 			} else {
 				try {
 					int number = Integer.parseInt(budget.getText());
 					hs.planHoliday(destination.getText(), number);
-					holiMsg.setTextFill(Color.GREEN);
-					holiMsg.setText("Holiday plan added to the list.");
+					userMsg.setTextFill(Color.GREEN);
+					userMsg.setText("Holiday plan added to the list.");
 					destination.setText("");
 					budget.setText("");
 					getHolidaysAsList();
 				} catch (NumberFormatException ex) {
 					budget.setText("");
-					holiMsg.setText("Give the budget as numbers.");
+					userMsg.setText("Give the budget as numbers.");
 				}
 			}
 		});
-		showHolidaysBtn.setOnAction(e -> stage.setScene(allHolidays));
 
 		createHolidayGP.add(createHolidaylbl, 0, 1);
 		createHolidayGP.add(destinationlbl, 0, 2);
@@ -277,16 +289,226 @@ public class HolidayUi extends Application {
 		createHolidayGP.add(budgetlbl, 0, 3);
 		createHolidayGP.add(budget, 1, 3);
 		createHolidayGP.add(createHolidayBtn, 0, 4);
-		createHolidayGP.add(showHolidaysBtn, 2, 4);
-		createHolidayGP.add(holiMsg, 0, 0);
+		createHolidayGP.add(userMsg, 0, 0);
 
 		newHolidaybp.setCenter(createHolidayGP);
+
+		return this.newHolidayScene;
+	}
+	
+	@Override
+	public void start(Stage stage) throws Exception {
+		this.stage = stage;
+		stage.setTitle("Holiday Budget");
+		stage.setHeight(250);
+		stage.setWidth(500);
+		
+		this.stage.setScene(setLoginScene());
+
+//		LOGIN SCENE
+//		Label userMessage = new Label();
+//		userMessage.setText("");
+//		BorderPane loginbp = new BorderPane();
+//
+//		// Add GridPane
+//		GridPane logingp = new GridPane();
+//		logingp.setPadding(new Insets(10));
+//		logingp.setHgap(5);
+//		logingp.setVgap(5);
+//
+//		// implementing nodes to gp layout
+//		Label lblUserName = new Label("Username");
+//		TextField loginInput = new TextField();
+//		Button btnLogin = new Button("Login");
+//		Button btnCreate = new Button("Sign in");
+//		btnCreate.setOnAction(e -> stage.setScene(newUserScene));
+//
+//		// Add nodes to gp layout
+//		logingp.add(lblUserName, 0, 0);
+//		logingp.add(loginInput, 0, 2);
+//		logingp.add(btnLogin, 0, 4);
+//		logingp.add(btnCreate, 1, 4);
+//		logingp.add(userMessage, 0, 1);
+//
+//		btnLogin.setOnAction(e -> {
+//			String username = loginInput.getText();
+//			if (hs.login(username)) {
+//				this.hs.login(username);
+//				stage.setTitle("User: " + username);
+//				stage.setScene(holidayScene);
+//				userMessage.setText("");
+//				loginInput.setText("");
+//			} else {
+//				userMessage.setTextFill(Color.RED);
+//				userMessage.setText("Something went wrong, try again!");
+//				loginInput.setText("");
+//			}
+//		});
+//
+//		loginbp.setTop(new Text("Holiday Budget Login"));
+//		loginbp.setCenter(logingp);
+//		this.loginScene = new Scene(loginbp);
+
+		// CREATE USER SCENE
+//		BorderPane newUserbp = new BorderPane();
+//
+//		Label resultMsg = new Label();
+//		resultMsg.setText("Message");
+//
+//		GridPane createUserGP = new GridPane();
+//		createUserGP.setPadding(new Insets(20));
+//		createUserGP.setVgap(10);
+//		createUserGP.setHgap(20);
+//
+//		Label createUser = new Label("Write username, min. 4 letters");
+//		TextField usernameInput = new TextField();
+//		Button newUserBtn = new Button("Create");
+//		Button goBackBtn = new Button("Login page");
+//
+//		createUserGP.add(createUser, 0, 1);
+//		createUserGP.add(usernameInput, 0, 2);
+//		createUserGP.add(newUserBtn, 0, 3);
+//		createUserGP.add(goBackBtn, 2, 3);
+//		createUserGP.add(resultMsg, 0, 0);
+//
+//		// actions for buttons create and go back
+//		newUserBtn.setOnAction(e -> {
+//			String username = usernameInput.getText();
+//			if (usernameInput.getText().length() <= 3) {
+//				resultMsg.setText("Username is too short, try again");
+//				stage.setScene(newUserScene);
+//			} else if (hs.createUser(username)) {
+////				userMessage.setText("New user created successfully, now login!");
+//				stage.setScene(loginScene);
+//			} else {
+//				resultMsg.setText("Username isn't available, try again.");
+//			}
+//		});
+//		goBackBtn.setOnAction(e -> stage.setScene(loginScene));
+//
+//		newUserbp.setTop(new Text("Create New Username"));
+//		newUserbp.setCenter(createUserGP);
+//
+//		newUserScene = new Scene(newUserbp);
+
+		// SHOW HOLIDAYS SCENE
+//		ScrollPane holidayScroll = new ScrollPane();
+//		BorderPane allHolidaybp = new BorderPane(holidayScroll);
+//		holidayScene = new Scene(allHolidaybp);
+//		Label findResultMsg = new Label();
+//		Label holiMsg = new Label();
+//
+//		// menu buttonst to top of borderpane
+//		HBox menuHolidayPage = new HBox(10);
+//		Region reg = new Region();
+//		Button logoutBtn = new Button("Log out");
+//		Button createHoliday = new Button("Add new");
+//		menuHolidayPage.getChildren().addAll(logoutBtn, reg, createHoliday);
+//		allHolidaybp.setTop(menuHolidayPage);
+//
+//		HBox showHolidayMenu = new HBox(10);
+//		TextField openHoliday = new TextField();
+//		Button tryOpen = new Button("Open");
+//		showHolidayMenu.getChildren().addAll(openHoliday, tryOpen);
+//		allHolidaybp.setBottom(showHolidayMenu);
+//		
+//
+//		tryOpen.setOnAction(e -> {
+//			String text = openHoliday.getText();
+//			if (hs.findHoliday(text) != null) {
+//				stage.setScene(activityScene);
+//				this.holiday = hs.findHoliday(text);
+//			} else {
+//				findResultMsg.setTextFill(Color.RED);
+//				findResultMsg.setText("Can't open the holiday, please try again.");
+//			}
+//		});
+//
+//		logoutBtn.setOnAction(e -> {
+//			stage.setScene(loginScene);
+////			userMessage.setTextFill(Color.GREEN);
+////			userMessage.setText("Logged out successfully!");
+//			this.hs.logOut();
+//		});
+//
+//		createHoliday.setOnAction(e -> {
+//			holiMsg.setText("");
+//			stage.setScene(newHolidayScene);
+//		});
+//
+//		holidayNodes = new VBox(10);
+//		holidayNodes.setMaxHeight(300);
+//		holidayNodes.setMaxWidth(300);
+//		getHolidaysAsList();
+//
+//		holidayScroll.setContent(holidayNodes);
+//
+//		allHolidaybp.setCenter(holidayScroll);
+
+//		CREATE HOLIDAY SCENE
+//		BorderPane newHolidaybp = new BorderPane();
+//		newHolidayScene = new Scene(newHolidaybp, 200, 250);
+//		// menubox for "logout" and "go back" buttons
+//		HBox menuBox = new HBox();
+//		menuBox.setSpacing(10);
+//		Button backHolidays = new Button("Back to Holidays");
+//		backHolidays.setOnAction(e -> stage.setScene(holidayScene));
+//		menuBox.setSpacing(10);
+//		menuBox.getChildren().addAll(backHolidays, logoutBtn);
+//
+//		newHolidaybp.setTop(menuBox);
+//
+//		resultMsg.setText("Message");
+//
+//		GridPane createHolidayGP = new GridPane();
+//		createHolidayGP.setPadding(new Insets(10));
+//		createHolidayGP.setVgap(5);
+//		createHolidayGP.setHgap(5);
+//
+//		Label createHolidaylbl = new Label("Add new holiday");
+//		Label destinationlbl = new Label("Destination");
+//		TextField destination = new TextField();
+//		Label budgetlbl = new Label("Budget (only numbers)");
+//		TextField budget = new TextField();
+//		Button createHolidayBtn = new Button("Create");
+//
+//		createHolidayBtn.setOnAction(e -> {
+//			if (destination.getText().isEmpty() || budget.getText().isEmpty()) {
+//				holiMsg.setTextFill(Color.RED);
+//				holiMsg.setText("Give the destination and the budget.");
+//				destination.setText("");
+//				budget.setText("");
+//			} else {
+//				try {
+//					int number = Integer.parseInt(budget.getText());
+//					hs.planHoliday(destination.getText(), number);
+//					holiMsg.setTextFill(Color.GREEN);
+//					holiMsg.setText("Holiday plan added to the list.");
+//					destination.setText("");
+//					budget.setText("");
+//					getHolidaysAsList();
+//				} catch (NumberFormatException ex) {
+//					budget.setText("");
+//					holiMsg.setText("Give the budget as numbers.");
+//				}
+//			}
+//		});
+//
+//		createHolidayGP.add(createHolidaylbl, 0, 1);
+//		createHolidayGP.add(destinationlbl, 0, 2);
+//		createHolidayGP.add(destination, 1, 2);
+//		createHolidayGP.add(budgetlbl, 0, 3);
+//		createHolidayGP.add(budget, 1, 3);
+//		createHolidayGP.add(createHolidayBtn, 0, 4);
+//		createHolidayGP.add(holiMsg, 0, 0);
+//
+//		newHolidaybp.setCenter(createHolidayGP);
 
 		// show holiday scene
 
 		// create action scene
 //		
-		stage.setScene(loginScene);
+//		stage.setScene(loginScene);
 
 		stage.show();
 
