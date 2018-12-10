@@ -90,7 +90,6 @@ public class HolidayService {
 		}
 	}
 
-	// login: if username does exist then true and loging, other way false
 	public boolean login(String username) {
 		User check = userDao.findByUsername(username);
 		if (check != null) {
@@ -100,7 +99,6 @@ public class HolidayService {
 		return false;
 	}
 
-	// returns user that is logged in
 	public User getLoggedUser() {
 		return user;
 	}

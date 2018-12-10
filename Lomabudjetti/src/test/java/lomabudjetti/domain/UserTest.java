@@ -40,4 +40,14 @@ public class UserTest {
     	
     	assertEquals(user.getHolidays(), list);
     }
+    
+    @Test
+    public void getHolidayWorks() {
+    	List<Holiday> holidays = new ArrayList<>();
+    	Holiday hol = new Holiday("Paris", 1000, user);
+    	holidays.add(hol);
+    	user.setList(holidays);
+    	
+    	assertEquals(user.getHoliday(hol.getId()), hol.getDestination());
+    }
 }
