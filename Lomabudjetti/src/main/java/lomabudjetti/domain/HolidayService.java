@@ -32,6 +32,15 @@ public class HolidayService {
 		}
 		return true;
 	}
+	
+	public boolean cancelHoliday(Holiday hol) {
+		try {
+				holidayDao.cancel(hol);
+		} catch (Exception ex) {
+			return false;
+		}
+		return true;
+	}
 
 	// get user's all holidays
 	public List<Holiday> getHolidays() {

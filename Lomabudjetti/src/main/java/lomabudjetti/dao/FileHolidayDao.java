@@ -13,9 +13,11 @@ public class FileHolidayDao implements HolidayDao {
 	
 	public List<Holiday> holidays;
 	private String file;
+	private int id;
 	
 	public FileHolidayDao(String file, UserDao users) throws Exception {
 		this.holidays = new ArrayList<>();
+		this.id = this.holidays.size();
 		this.file = file;
 		try {
 			Scanner readTxt = new Scanner(new File(this.file));
@@ -35,7 +37,7 @@ public class FileHolidayDao implements HolidayDao {
 	}
 	
 	private int giveId() {
-		return holidays.size();
+		return this.id;
 	}
 	
 	private void save() throws Exception {
@@ -45,12 +47,6 @@ public class FileHolidayDao implements HolidayDao {
             }
         }
 	}
-	
-//	public Holiday plan(Holiday holiday) throws Exception {
-//		holiday.setId(giveId());
-//		holidays.add(holiday);
-//		return holiday;
-//	}
 	
 	public List<Holiday> getAll() {
 		return holidays;
@@ -65,8 +61,14 @@ public class FileHolidayDao implements HolidayDao {
 	public Holiday create(Holiday holiday) throws Exception {
 		holiday.setId(giveId());
 		holidays.add(holiday);
+		this.id++;
 		save();
 		return holiday;
+	}
+	
+	public void cancel(Holiday holiday) throws Exception {
+		holidays.remove(holiday);
+		save();
 	}
 
 	public void setPast(int id) throws Exception {

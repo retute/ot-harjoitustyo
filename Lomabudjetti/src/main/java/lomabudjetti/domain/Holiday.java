@@ -75,6 +75,11 @@ public class Holiday {
 		this.coming = false;
 	}
 	
+	/**
+	 * Metodi laskee valitun loman aktiviteettien hintojen yhteenlasketun summan. 
+	 *
+	 * @return aktiviteettien hintojen summa
+	 */
 	public int checkCostOfActivities() {
 		for(int i = 0; i < this.activities.size(); i++) {
 			this.activitiesCost += this.activities.get(i).getPrice();
@@ -83,16 +88,18 @@ public class Holiday {
 		return this.activitiesCost;
 	}
 	
+	/**
+	 * Metodi tarkastaa, riittääkö loman budjetti lisättävään aktiviteettiin. Jos budjetti ylittyy, niin metodi palauttaa false. Muuten metodi palauttaa true.
+	 * @param   activity Lisättävä aktiviteetti
+	 * 
+	 * @return true/false (tieto riittääkö budjetti)
+	 */
 	public boolean moneyForTheActivity(Activity activity) {
 		if (budget - activity.getPrice() < 0) {
 			return false;
 		}
 		return true;
 	}
-	
-//	public String toString() {
-//		return "Destination: " + this.destination + ", Budget: " + this.budget;
-//	}
 
 //	public void crowBudget(int more) {
 //		this.budget += more;
