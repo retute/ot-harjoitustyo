@@ -31,8 +31,8 @@ public class UserTest {
     
     @Test
     public void setHolidaysWorksCorrect() {
-    	Holiday hol = new Holiday("Paris", user);
-    	Holiday holi = new Holiday("Krabi", user);
+    	Holiday hol = new Holiday("Paris", 1000, user);
+    	Holiday holi = new Holiday("Krabi", 2020, user);
     	List<Holiday> list = new ArrayList<>();
     	list.add(hol);
     	list.add(holi);

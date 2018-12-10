@@ -22,7 +22,6 @@ public class HolidayUi extends Application {
 
 	private HolidayService hs;
 
-	private Scene holidayScene;
 	private Scene allHolidays; // list of holidays
 	private Scene newHolidayScene;
 	private Scene loginScene; // log in page

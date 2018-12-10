@@ -17,13 +17,10 @@ public class ActivityTest {
 	Holiday holiday;
 	User user;
 
-	public ActivityTest() {
-	}
-
 	@Before
     public void setUp() {
 		user = new User("Mike");
-    	holiday = new Holiday("Paris", user);
+    	holiday = new Holiday("Paris", 500, user);
         activity = new Activity("Sleep", holiday);
     }
 

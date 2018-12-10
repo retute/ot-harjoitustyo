@@ -11,10 +11,10 @@ public class FileUserDao implements UserDao {
 	private List<User> userList;
 	private String file;
 
-    /**
-     * Konstruktori. Luo listan käyttäjistä, jotka sovellusta käyttävät
-     * ja määrittelee tiedosto, johon käyttäjätunnukset tallennetaan. 
-     */
+//    /**
+//     * Konstruktori. Luo listan käyttäjistä, jotka sovellusta käyttävät
+//     * ja määrittelee tiedosto, johon käyttäjätunnukset tallennetaan. 
+//     */
 	public FileUserDao(String file) throws Exception {
 		this.userList = new ArrayList<>();
 		this.file = file;
@@ -33,10 +33,10 @@ public class FileUserDao implements UserDao {
 		}
 	}
 	
-    /**
-     * Metodi talleentaa käyttäjänumen listaan. Jokainen käyttäjätunnus on omalla 
-     * rivillään.
-     */
+//    /**
+//     * Metodi talleentaa käyttäjänumen listaan. Jokainen käyttäjätunnus on omalla 
+//     * rivillään.
+//     */
 	private void save() throws Exception {
 		try (FileWriter writer  = new FileWriter(new File(this.file))) {
 			for (User user : userList) {
@@ -45,14 +45,14 @@ public class FileUserDao implements UserDao {
 		}
 	}
 
-    /**
-     * Metodi etsii kättäjää käyttäjänimen perusteella käyttäjälistasta. Metodi
-     * palauttaa käyttäjä, jos sellainen löytyy. Muuten metodi palauttaa null.
-     * 
-     * @param username Käyttäjänimi, jolla käyttäjää haetaan
-     * 
-     * @return löydetyn käyttäjän / null
-     */
+//    /**
+//     * Metodi etsii kättäjää käyttäjänimen perusteella käyttäjälistasta. Metodi
+//     * palauttaa käyttäjä, jos sellainen löytyy. Muuten metodi palauttaa null.
+//     * 
+//     * @param username Käyttäjänimi, jolla käyttäjää haetaan
+//     * 
+//     * @return löydetyn käyttäjän / null
+//     */
 	@Override
 	public User findByUsername(String username) {
 		return userList.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
