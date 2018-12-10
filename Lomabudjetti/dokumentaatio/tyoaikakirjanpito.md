@@ -16,5 +16,7 @@ Päivä | Aika | Mitä tein
 2.12. | 2 | Näkymän luominen
 3.12. | 4 | Kirjautimisen onnistumisen toteutus
 4.12. | 3 | Scenejen luomista kirjautumisen jälkeen
+7.12. | 1 | Näkymien muokkausta
+9.12. | 4 | Lomien listausnäkymä ja pieniä muutoksia luokissa
 
-Yhteensä 23
+Yhteensä 41
