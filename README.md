@@ -3,7 +3,7 @@ Sovellus toimii apuna suunnitellessa lomaa itse asetetun budjetin mukaisesti. Jo
 tunnukset ja lisätä omiin tietoihin tulevia lomia. Jokaisella lomalla on nimi ja budjetti. 
 
 ## Dokumentaatio
-Käyttöohje
+[Käyttöohje](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kaytto-ohje.md)
 
 [Vaativuusmäärittely](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/maarittelydokumentti.md)
 

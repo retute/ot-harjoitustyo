@@ -187,9 +187,10 @@ public class HolidayUi extends Application {
         allHolidaybp.setTop(menuHolidayPage);
 
         HBox showHolidayMenu = new HBox(10);
+        Label openText = new Label("Holiday's destination: ");
         TextField openHoliday = new TextField();
         Button tryOpen = new Button("Open");
-        showHolidayMenu.getChildren().addAll(openHoliday, tryOpen);
+        showHolidayMenu.getChildren().addAll(openText, openHoliday, tryOpen);
         allHolidaybp.setBottom(showHolidayMenu);
 
         tryOpen.setOnAction(e -> {
@@ -217,7 +218,7 @@ public class HolidayUi extends Application {
 
         createHoliday.setOnAction(e -> {
             userMsg.setText("");
-            stage.setScene(setNewholidayScene());
+            stage.setScene(setNewHolidayScene());
         });
 
         holidayNodes = new VBox(10);
@@ -232,7 +233,7 @@ public class HolidayUi extends Application {
     }
 
     // NEW HOLIDAY SCENE
-    public Scene setNewholidayScene() {
+    public Scene setNewHolidayScene() {
         BorderPane newHolidaybp = new BorderPane();
         newHolidayScene = new Scene(newHolidaybp, 200, 250);
         // menubox for "logout" and "go back" buttons
