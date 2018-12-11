@@ -1,2 +1,3 @@
 Viro;500;terotero
 Korso;300;terotero
+Sörkkä;5;terotero
