@@ -57,44 +57,44 @@ public class HolidayUi extends Application {
         Label lbl = new Label(hol.getDestination());
         lbl.setMinHeight(30);
         Button btn1 = new Button("Cancel");
-        Button btn2 = new Button("Open");
+//        Button btn2 = new Button("Open");
         btn1.setOnAction(e -> {
             hs.cancelHoliday(hol);
             getHolidaysAsList();
         });
-        btn2.setOnAction(e->{
-            this.holiday = hol;
-            try {
-                this.stage.setScene(activityScene);
-            } catch (NullPointerException ex) {
-                //jotain
-            }
-            
-        });
+//        btn2.setOnAction(e->{
+//            this.holiday = hol;
+//            try {
+//                this.stage.setScene(activityScene);
+//            } catch (NullPointerException ex) {
+//                //jotain
+//            }
+//            
+//        });
 
         Region reg = new Region();
         HBox.setHgrow(reg, Priority.ALWAYS);
         holiBox.setPadding(new Insets(0, 5, 0, 5));
 
-        holiBox.getChildren().addAll(lbl, reg, btn1, btn2);
+        holiBox.getChildren().addAll(lbl, reg, btn1);
         return holiBox;
     }
     
-//    public Node planActivityNode(Activity act) {
-//        HBox actiBox = new HBox(10);
-//        Label lbl = new Label(act.getName());
-//        lbl.setMinHeight(30);
-//        Button btn = new Button("save " + act.getPrice() + "€");
-//        btn.setOnAction(e-> {
-//            
-//        });
-//        Region reg = new Region();
-//        HBox.setHgrow(reg, Priority.ALWAYS);
-//        actiBox.setPadding(new Insets(0, 5, 0, 5));
-//        
-//        actiBox.getChildren().addAll(lbl, re)
-//        return actiBox;
-//    }
+    public Node planActivityNode(Activity act) {
+        HBox actiBox = new HBox(10);
+        Label lbl = new Label(act.getName());
+        lbl.setMinHeight(30);
+        Button btn = new Button("save " + act.getPrice() + "€");
+        btn.setOnAction(e-> {
+            
+        });
+        Region reg = new Region();
+        HBox.setHgrow(reg, Priority.ALWAYS);
+        actiBox.setPadding(new Insets(0, 5, 0, 5));
+        
+        actiBox.getChildren().addAll(lbl, reg);
+        return actiBox;
+    }
 
     public void getHolidaysAsList() {
         holidayNodes.getChildren().clear();
@@ -212,28 +212,28 @@ public class HolidayUi extends Application {
         menuHolidayPage.getChildren().addAll(logoutBtn, reg, createHoliday);
         allHolidaybp.setTop(menuHolidayPage);
 
-//        HBox showHolidayMenu = new HBox(10);
-//        Label openText = new Label("Holiday's destination: ");
-//        TextField openHoliday = new TextField();
-//        Button tryOpen = new Button("Open");
-//        showHolidayMenu.getChildren().addAll(openText, openHoliday, tryOpen);
-//        allHolidaybp.setBottom(showHolidayMenu);
-//
-//        tryOpen.setOnAction(e -> {
-//            String text = openHoliday.getText();
-//            if (hs.findHoliday(text) != null) {
-//                this.holiday = hs.findHoliday(text);
-//                try {
-//                    stage.setScene(setActivityScene());
-//                } catch (NullPointerException ex) {
-//                    findResultMsg.setTextFill(Color.RED);
-//                    findResultMsg.setText("Couldn't open the holiday.");
-//                }
-//            } else {
-//                findResultMsg.setTextFill(Color.RED);
-//                findResultMsg.setText("Can't open the holiday, please try again.");
-//            }
-//        });
+        HBox showHolidayMenu = new HBox(10);
+        Label openText = new Label("Holiday's destination: ");
+        TextField openHoliday = new TextField();
+        Button tryOpen = new Button("Open");
+        showHolidayMenu.getChildren().addAll(openText, openHoliday, tryOpen);
+        allHolidaybp.setBottom(showHolidayMenu);
+
+        tryOpen.setOnAction(e -> {
+            String text = openHoliday.getText();
+            if (hs.findHoliday(text) != null) {
+                this.holiday = hs.findHoliday(text);
+                try {
+                    stage.setScene(setActivityScene());
+                } catch (NullPointerException ex) {
+                    findResultMsg.setTextFill(Color.RED);
+                    findResultMsg.setText("Couldn't open the holiday.");
+                }
+            } else {
+                findResultMsg.setTextFill(Color.RED);
+                findResultMsg.setText("Can't open the holiday, please try again.");
+            }
+        });
 
         logoutBtn.setOnAction(e -> {
             stage.setScene(setLoginScene());

@@ -19,5 +19,7 @@ Päivä | Aika | Mitä tein
 7.12. | 1 | Näkymien muokkausta
 9.12. | 4 | Lomien listausnäkymä ja pieniä muutoksia luokissa
 10.12. | 5 | Testejä ja näkymää
+11.12. | 3 | Käyttöohjeet ja näkymää
 
-Yhteensä 46
+
+Yhteensä 49
