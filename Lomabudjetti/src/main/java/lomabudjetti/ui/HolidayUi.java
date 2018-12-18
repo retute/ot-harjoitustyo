@@ -29,11 +29,11 @@ public class HolidayUi extends Application {
     private Scene activityScene; // holiday's activity list
 
     private VBox holidayNodes;
+    private VBox activityNodes;
     private Holiday holiday;
     private Stage stage;
     private Label userMsg;
     private Label loginPageMsg;
-//	private Button logout;
 
     @Override
     public void init() throws Exception {
@@ -57,20 +57,10 @@ public class HolidayUi extends Application {
         Label lbl = new Label(hol.getDestination());
         lbl.setMinHeight(30);
         Button btn1 = new Button("Cancel");
-//        Button btn2 = new Button("Open");
         btn1.setOnAction(e -> {
             hs.cancelHoliday(hol);
             getHolidaysAsList();
         });
-//        btn2.setOnAction(e->{
-//            this.holiday = hol;
-//            try {
-//                this.stage.setScene(activityScene);
-//            } catch (NullPointerException ex) {
-//                //jotain
-//            }
-//            
-//        });
 
         Region reg = new Region();
         HBox.setHgrow(reg, Priority.ALWAYS);
@@ -80,22 +70,6 @@ public class HolidayUi extends Application {
         return holiBox;
     }
     
-    public Node planActivityNode(Activity act) {
-        HBox actiBox = new HBox(10);
-        Label lbl = new Label(act.getName());
-        lbl.setMinHeight(30);
-        Button btn = new Button("save " + act.getPrice() + "€");
-        btn.setOnAction(e-> {
-            
-        });
-        Region reg = new Region();
-        HBox.setHgrow(reg, Priority.ALWAYS);
-        actiBox.setPadding(new Insets(0, 5, 0, 5));
-        
-        actiBox.getChildren().addAll(lbl, reg);
-        return actiBox;
-    }
-
     public void getHolidaysAsList() {
         holidayNodes.getChildren().clear();
         List<Holiday> holidays = hs.getHolidays();
@@ -103,26 +77,47 @@ public class HolidayUi extends Application {
             holidayNodes.getChildren().add(planHolidayNode(holidayh));
         });
     }
+    
+    public Node planActivityNode(Activity act) {
+        HBox actiBox = new HBox(10);
+        Label lbl = new Label(act.getName() + ", " + act.getPrice() + "€");
+        lbl.setMinHeight(30);
+        Button btn = new Button("Delete");
+        btn.setOnAction(e-> {
+            hs.findHoliday(holiday.getDestination()).getActivities().remove(act);
+        });
+        Region reg = new Region();
+        HBox.setHgrow(reg, Priority.ALWAYS);
+        actiBox.setPadding(new Insets(0, 5, 0, 5));
+        
+        actiBox.getChildren().addAll(lbl, reg, btn);
+        return actiBox;
+    }
+    
+    public void getActivitiesAsList() {
+    	activityNodes.getChildren().clear();
+    	List<Activity> activities = hs.findHoliday(this.holiday.getDestination()).getActivities();
+    	activities.forEach(activ -> {
+    		activityNodes.getChildren().add(planActivityNode(activ));
+    	});
+    }
 
     public Scene setLoginScene() {
         this.loginPageMsg = new Label("");
         BorderPane loginbp = new BorderPane();
         this.loginScene = new Scene(loginbp);
 
-        // Add GridPane
         GridPane logingp = new GridPane();
         logingp.setPadding(new Insets(10));
         logingp.setHgap(5);
         logingp.setVgap(5);
 
-        // implementing nodes to gp layout
         Label lblUserName = new Label("Username");
         TextField loginInput = new TextField();
         Button btnLogin = new Button("Login");
         Button btnCreate = new Button("Sign in");
         btnCreate.setOnAction(e -> stage.setScene(setSigninScene()));
 
-        // Add nodes to gp layout
         logingp.add(lblUserName, 0, 0);
         logingp.add(loginInput, 0, 2);
         logingp.add(btnLogin, 0, 4);
@@ -173,7 +168,6 @@ public class HolidayUi extends Application {
         createUserGP.add(goBackBtn, 2, 3);
         createUserGP.add(resultMsg, 0, 0);
 
-        // actions for buttons create and go back
         newUserBtn.setOnAction(e -> {
             String username = usernameInput.getText();
             if (usernameInput.getText().length() <= 3) {
@@ -196,26 +190,25 @@ public class HolidayUi extends Application {
         return this.newUserScene;
     }
 
-    // HOLIDAY LIST SCENE
     public Scene setHolidaylistScene() {
         ScrollPane holidayScroll = new ScrollPane();
         BorderPane allHolidaybp = new BorderPane(holidayScroll);
         this.allHolidays = new Scene(allHolidaybp);
-        Label findResultMsg = new Label();
         userMsg = new Label();
 
-        // menu buttonst to top of borderpane
         HBox menuHolidayPage = new HBox(10);
         Region reg = new Region();
         Button logoutBtn = new Button("Log out");
         Button createHoliday = new Button("Add new");
         menuHolidayPage.getChildren().addAll(logoutBtn, reg, createHoliday);
         allHolidaybp.setTop(menuHolidayPage);
+        allHolidaybp.setRight(userMsg);
 
         HBox showHolidayMenu = new HBox(10);
         Label openText = new Label("Holiday's destination: ");
         TextField openHoliday = new TextField();
         Button tryOpen = new Button("Open");
+
         showHolidayMenu.getChildren().addAll(openText, openHoliday, tryOpen);
         allHolidaybp.setBottom(showHolidayMenu);
 
@@ -223,15 +216,12 @@ public class HolidayUi extends Application {
             String text = openHoliday.getText();
             if (hs.findHoliday(text) != null) {
                 this.holiday = hs.findHoliday(text);
-                try {
                     stage.setScene(setActivityScene());
-                } catch (NullPointerException ex) {
-                    findResultMsg.setTextFill(Color.RED);
-                    findResultMsg.setText("Couldn't open the holiday.");
-                }
+                    userMsg.setText("");
+
             } else {
-                findResultMsg.setTextFill(Color.RED);
-                findResultMsg.setText("Can't open the holiday, please try again.");
+            	userMsg.setTextFill(Color.RED);
+            	userMsg.setText("Check that you wrote the name of the holiday right!");
             }
         });
 
@@ -258,11 +248,9 @@ public class HolidayUi extends Application {
         return this.allHolidays;
     }
 
-    // NEW HOLIDAY SCENE
     public Scene setNewHolidayScene() {
         BorderPane newHolidaybp = new BorderPane();
         newHolidayScene = new Scene(newHolidaybp, 200, 250);
-        // menubox for "logout" and "go back" buttons
         HBox menuBox = new HBox();
         menuBox.setSpacing(10);
         Button backHolidays = new Button("Back to Holidays");
@@ -273,7 +261,6 @@ public class HolidayUi extends Application {
 
         newHolidaybp.setTop(menuBox);
 
-//		reMsg.setText("Message");
         GridPane createHolidayGP = new GridPane();
         createHolidayGP.setPadding(new Insets(10));
         createHolidayGP.setVgap(5);
@@ -332,7 +319,39 @@ public class HolidayUi extends Application {
         this.stage.setTitle(hs.getLoggedUser().getUsername() + " goes to " + this.holiday.getDestination());
         BorderPane activitiesbp = new BorderPane();
         this.activityScene = new Scene(activitiesbp);
-
+        ScrollPane activityScroll = new ScrollPane();
+        userMsg = new Label();
+        HBox menu = new HBox(10);
+        Region reg = new Region();
+        Button logout = new Button("Log out");
+        Button goBack = new Button("Go Back");
+        menu.getChildren().addAll(logout, reg, goBack);
+        activitiesbp.setTop(menu);
+        
+        logout.setOnAction(e->{
+        	this.stage.setScene(loginScene);
+        	this.userMsg.setTextFill(Color.GREEN);
+        	this.userMsg.setText("Logged out successfully!");
+        });
+        goBack.setOnAction(e->{
+        	this.stage.setScene(allHolidays);
+        });
+        
+        activityNodes = new VBox(10);
+        activityNodes.setMaxHeight(300);
+        activityNodes.setMaxWidth(300);
+        getActivitiesAsList();
+        
+        activityScroll.setContent(activityNodes);
+        activitiesbp.setCenter(activityScroll);
+        
+        VBox addActivity = new VBox(10);
+        activitiesbp.setRight(addActivity);
+        
+        
+        
+        
+        
         return this.activityScene;
     }
 

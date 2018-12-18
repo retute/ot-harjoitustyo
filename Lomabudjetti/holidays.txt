@@ -1,2 +1,3 @@
 Sörkkä;5;terotero
 Viro;1000;terotero
+Korso;5;terotero
