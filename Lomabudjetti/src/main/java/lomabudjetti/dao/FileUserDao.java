@@ -11,10 +11,10 @@ public class FileUserDao implements UserDao {
 	private List<User> userList;
 	private String file;
 
-//    /**
-//     * Konstruktori. Luo listan käyttäjistä, jotka sovellusta käyttävät
-//     * ja määrittelee tiedosto, johon käyttäjätunnukset tallennetaan. 
-//     */
+    /**
+     * Konstruktori. Luo listan käyttäjistä, jotka sovellusta käyttävät
+     * ja määrittelee tiedosto, johon käyttäjätunnukset tallennetaan. 
+     */
 	public FileUserDao(String file) throws Exception {
 		this.userList = new ArrayList<>();
 		this.file = file;

@@ -22,7 +22,15 @@ public class HolidayService {
 		this.activityDao = activityDao;
 	}
 
-	// add new holiday for the user logged in
+    /**
+     *Metodi luo loman ja yrittää tallentaa sen pysyvästi holidayDao-luokkaan.
+     *Jos tallennus ei onnistu, niin metodi palauttaa false. Muuten palauttaa true.
+     * 
+     * @param destination Lomakohde String-muuttujana
+     * @param budget Lomabudjetti int-muuttujana
+     * 
+     * @return true/false
+     */
 	public boolean planHoliday(String destination, int budget) {
 		Holiday holiday = new Holiday(destination, budget, user);
 		try {
@@ -53,6 +61,15 @@ public class HolidayService {
 		try {
 			activityDao.create(activity);
 		} catch (Exception exception) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteActivity(Activity act) {
+		try {
+			activityDao.deleteActivity(act);
+		} catch (Exception ex) {
 			return false;
 		}
 		return true;
