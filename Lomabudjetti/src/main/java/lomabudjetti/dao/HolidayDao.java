@@ -3,6 +3,7 @@ package lomabudjetti.dao;
 import java.util.List;
 
 import lomabudjetti.domain.Holiday;
+import lomabudjetti.domain.User;
 
 public interface HolidayDao {
 

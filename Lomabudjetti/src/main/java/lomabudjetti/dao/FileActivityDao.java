@@ -2,6 +2,7 @@ package lomabudjetti.dao;
 
 import lomabudjetti.domain.Activity;
 import lomabudjetti.domain.Holiday;
+import lomabudjetti.domain.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +13,7 @@ public class FileActivityDao implements ActivityDao {
 	
 	public List<Activity> activities;
 	private String file;
+//	private User user;
 	
 	public FileActivityDao(String file, HolidayDao holidays) throws Exception {
 		this.activities = new ArrayList<>();
@@ -36,15 +38,17 @@ public class FileActivityDao implements ActivityDao {
 	private void save() throws Exception {
 		try (FileWriter writer = new FileWriter(new File(file))) {
 			for (Activity activity : activities) {
-				writer.write(activity.getName() + ";" + ";" + activity.getPrice() + ";" + activity.getHoliday().getDestination() + "\n");
+				writer.write(activity.getName() + ";" + activity.getPrice() + ";" + activity.getHoliday().getDestination() + "\n");
 			}
 		}
 	}
 	
 	
 	public Activity create(Activity activity) throws Exception {
-		if (activity.getHoliday().getBudget() -activity.getPrice() >= 0) {
+		int moneyleft = activity.getHoliday().getBudget();
+		if (moneyleft -activity.getPrice() >= 0) {
 			activities.add(activity);
+			activity.getHoliday().setBudget(moneyleft-activity.getPrice());
 		}
 		save();
 		return activity;
@@ -60,11 +64,5 @@ public class FileActivityDao implements ActivityDao {
 	public List<Activity> getAll() {
 		return activities;
 	}
-
-//	@Override
-//	public Activity create(Activity activity) throws Exception {
-//		activities.add(activity);
-//		return activity;
-//	}
 	
 }

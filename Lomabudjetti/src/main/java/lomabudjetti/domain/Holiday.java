@@ -10,7 +10,6 @@ public class Holiday {
 	private List<Activity> activities;
 	private User user;
 	private boolean coming;
-	private int id;
 	private int activitiesCost;
 
 	public Holiday(String destination, int budget, User user) {
@@ -28,11 +27,11 @@ public class Holiday {
 		this.activities = activities;
 		this.coming = true;
 		this.activitiesCost = 0;
-                this.id = id;
 	}
 
 	public void addActivity(Activity activity) {
 		activities.add(activity);
+		budget-=activity.getPrice();
 	}
 
 	public void setActivities(List<Activity> activities) {
@@ -58,14 +57,6 @@ public class Holiday {
 	public User getUser() {
 		return this.user;
 	}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public boolean isComing() {
 		return coming;
@@ -75,11 +66,11 @@ public class Holiday {
 		this.coming = false;
 	}
 	
-//	/**
-//	 * Metodi laskee valitun loman aktiviteettien hintojen yhteenlasketun summan. 
-//	 *
-//	 * @return aktiviteettien hintojen summa
-//	 */
+	/**
+	 * Metodi laskee valitun loman aktiviteettien hintojen yhteenlasketun summan. 
+	 *
+	 * @return aktiviteettien hintojen summa
+	 */
 	public int checkCostOfActivities() {
 		for(int i = 0; i < this.activities.size(); i++) {
 			this.activitiesCost += this.activities.get(i).getPrice();
@@ -87,26 +78,18 @@ public class Holiday {
 		
 		return this.activitiesCost;
 	}
-//	
-//	/**
-//	 * Metodi tarkastaa, riittääkö loman budjetti lisättävään aktiviteettiin. Jos budjetti ylittyy, niin metodi palauttaa false. Muuten metodi palauttaa true.
-//	 * @param   activity Lisättävä aktiviteetti
-//	 * 
-//	 * @return true/false (tieto riittääkö budjetti)
-//	 */
+	
+	/**
+	 * Metodi tarkastaa, riittääkö loman budjetti lisättävään aktiviteettiin. Jos budjetti ylittyy, niin metodi palauttaa false. Muuten metodi palauttaa true.
+	 * @param   activity Lisättävä aktiviteetti
+	 * 
+	 * @return true/false (tieto riittääkö budjetti)
+	 */
 	public boolean moneyForTheActivity(Activity activity) {
 		if (budget - activity.getPrice() < 0) {
 			return false;
 		}
 		return true;
 	}
-
-//	public void crowBudget(int more) {
-//		this.budget += more;
-//	}
-//
-//	public void decreaseBudget(int less) {
-//		this.budget -= less;
-//	}
 
 }

@@ -38,7 +38,6 @@ public class HolidayUi extends Application {
 	@Override
 	public void init() throws Exception {
 		Properties properties = new Properties();
-//
 		properties.load(new FileInputStream("config.properties"));
 
 		String userFile = properties.getProperty("userFile");
@@ -54,7 +53,7 @@ public class HolidayUi extends Application {
 
 	public Node planHolidayNode(Holiday hol) {
 		HBox holiBox = new HBox(10);
-		Label lbl = new Label(hol.getDestination());
+		Label lbl = new Label(hol.getDestination() + ", \n " + hol.getBudget() + "€");
 		lbl.setMinHeight(30);
 		Button btn1 = new Button("Cancel");
 		btn1.setOnAction(e -> {
@@ -84,7 +83,7 @@ public class HolidayUi extends Application {
 		lbl.setMinHeight(30);
 		Button btn = new Button("Delete");
 		btn.setOnAction(e -> {
-			hs.findHoliday(holiday.getDestination()).getActivities().remove(act);
+			hs.deleteActivity(act);
 		});
 		Region reg = new Region();
 		HBox.setHgrow(reg, Priority.ALWAYS);
@@ -96,7 +95,7 @@ public class HolidayUi extends Application {
 
 	public void getActivitiesAsList() {
 		activityNodes.getChildren().clear();
-		List<Activity> activities = hs.findHoliday(this.holiday.getDestination()).getActivities();
+		List<Activity> activities = hs.findHolidayActivities(this.holiday);
 		activities.forEach(activ -> {
 			activityNodes.getChildren().add(planActivityNode(activ));
 		});
@@ -218,7 +217,7 @@ public class HolidayUi extends Application {
 				this.holiday = hs.findHoliday(text);
 				stage.setScene(setActivityScene());
 				userMsg.setText("");
-
+				openHoliday.setText("");
 			} else {
 				userMsg.setTextFill(Color.RED);
 				userMsg.setText("Check that you wrote the name of the holiday right!");
@@ -337,16 +336,54 @@ public class HolidayUi extends Application {
 			this.stage.setScene(allHolidays);
 		});
 
-//		activityNodes = new VBox(10);
-//		activityNodes.setMaxHeight(300);
-//		activityNodes.setMaxWidth(300);
-//		getActivitiesAsList();
-//
+		activityNodes = new VBox(10);
+		activityNodes.setMaxHeight(300);
+		activityNodes.setMaxWidth(300);
+		getActivitiesAsList();
+
 		activityScroll.setContent(activityNodes);
 		activitiesbp.setCenter(activityScroll);
 
 		VBox addActivity = new VBox(10);
 		activitiesbp.setRight(addActivity);
+
+		Label actName = new Label("Activity's name: ");
+		TextField nameInput = new TextField();
+		Label actPrice = new Label("Activity's price: ");
+		TextField priceInput = new TextField();
+		Button addAct = new Button("Add");
+
+		addAct.setOnAction(e -> {
+			if (nameInput.getText().isEmpty() || priceInput.getText().isEmpty()) {
+				userMsg.setTextFill(Color.RED);
+				userMsg.setText("Give the activity and its price.");
+				nameInput.setText("");
+				priceInput.setText("");
+			} else {
+				try {
+					int price = Integer.parseInt(priceInput.getText());
+					if (holiday.checkCostOfActivities() < price) {
+						userMsg.setTextFill(Color.RED);
+						userMsg.setText("You don't have enough money for this activity.");
+						nameInput.setText("");
+						priceInput.setText("");
+					} else {
+						Activity activ = new Activity(nameInput.getText(), price, this.holiday);
+						hs.planActivity(activ);
+						userMsg.setText("");
+						nameInput.setText("");
+						priceInput.setText("");
+						getActivitiesAsList();
+					}
+				} catch (NumberFormatException ex) {
+					userMsg.setText("Give the price as numbers.");
+					priceInput.setText("");
+				}
+			}
+
+		});
+
+		addActivity.getChildren().addAll(userMsg, actName, nameInput, actPrice, priceInput, addAct);
 
 		return this.activityScene;
 	}

@@ -14,7 +14,7 @@ public class HolidayService {
 	private ActivityDao activityDao;
 	private HolidayDao holidayDao;
 	private User user;
-	private Holiday holiday;
+//	private Holiday holiday;
 
 	public HolidayService(UserDao userDao, HolidayDao holidayDao, ActivityDao activityDao) {
 		this.userDao = userDao;
@@ -22,15 +22,15 @@ public class HolidayService {
 		this.activityDao = activityDao;
 	}
 
-    /**
-     *Metodi luo loman ja yrittää tallentaa sen pysyvästi holidayDao-luokkaan.
-     *Jos tallennus ei onnistu, niin metodi palauttaa false. Muuten palauttaa true.
-     * 
-     * @param destination Lomakohde String-muuttujana
-     * @param budget Lomabudjetti int-muuttujana
-     * 
-     * @return true/false
-     */
+	/**
+	 * Metodi luo loman ja yrittää tallentaa sen pysyvästi holidayDao-luokkaan. Jos
+	 * tallennus ei onnistu, niin metodi palauttaa false. Muuten palauttaa true.
+	 * 
+	 * @param destination Lomakohde String-muuttujana
+	 * @param budget      Lomabudjetti int-muuttujana
+	 * 
+	 * @return true/false
+	 */
 	public boolean planHoliday(String destination, int budget) {
 		Holiday holiday = new Holiday(destination, budget, user);
 		try {
@@ -40,24 +40,30 @@ public class HolidayService {
 		}
 		return true;
 	}
-	
-	public boolean cancelHoliday(Holiday hol) {
+
+	/**
+	 * Metodi poistaa käyttäjän tallentaman loman listasta ja palauttaa true, jos
+	 * poisto onnistuu. Muuten palauttaa false.
+	 *
+	 * @param holiday Loma, joka halutaan perua
+	 * 
+	 * @return true/false
+	 */
+	public boolean cancelHoliday(Holiday holiday) {
 		try {
-				holidayDao.cancel(hol);
+			holidayDao.cancel(holiday);
+			return true;
 		} catch (Exception ex) {
 			return false;
 		}
-		return true;
 	}
 
-	// get user's all holidays
 	public List<Holiday> getHolidays() {
+		
 		return holidayDao.getAll();
 	}
 
-	// creates activity, if the holiday budget is enough
-	public boolean planActivity(String name) {
-		Activity activity = new Activity(name, holiday);
+	public boolean planActivity(Activity activity) {
 		try {
 			activityDao.create(activity);
 		} catch (Exception exception) {
@@ -65,7 +71,7 @@ public class HolidayService {
 		}
 		return true;
 	}
-	
+
 	public boolean deleteActivity(Activity act) {
 		try {
 			activityDao.deleteActivity(act);
@@ -77,13 +83,12 @@ public class HolidayService {
 
 	public List<String> getDestinations() {
 		List<String> destinations = new ArrayList<>();
-		for (int i = 0; i < this.holidayDao.getAll().size(); i++) {
-			destinations.add(user.getHoliday(i));
+		for (Holiday hol : user.getHolidays()) {
+			destinations.add(hol.getDestination());
 		}
 		return destinations;
 	}
 
-	// get holiday's all activities
 	public List<Activity> getActivities() {
 		return activityDao.getAll();
 	}
@@ -92,7 +97,10 @@ public class HolidayService {
 		return holidayDao.findByDestination(destination);
 	}
 
-	// creates user if the username doesn't exist already
+	public List<Activity> findHolidayActivities(Holiday hol) {
+		return activityDao.getAll();
+	}
+
 	public boolean createUser(String username) {
 		if (userDao.findByUsername(username) == null) {
 			User user = new User(username);

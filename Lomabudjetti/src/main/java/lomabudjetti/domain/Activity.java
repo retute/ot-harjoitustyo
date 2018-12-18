@@ -18,14 +18,6 @@ public class Activity {
 
     }    
     
-//    public void setId(int id) {
-//    	this.id = id;
-//    }
-//    
-//    public int getId() {
-//    	return this.id;
-//    }
-    
     public String getName() {
     	return this.name;
     }

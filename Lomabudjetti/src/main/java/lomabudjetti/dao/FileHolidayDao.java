@@ -10,14 +10,12 @@ import lomabudjetti.domain.Holiday;
 import lomabudjetti.domain.User;
 
 public class FileHolidayDao implements HolidayDao {
-	
+
 	public List<Holiday> holidays;
 	private String file;
-//	private int id;
-	
+
 	public FileHolidayDao(String file, UserDao users) throws Exception {
 		this.holidays = new ArrayList<>();
-//		this.id = this.holidays.size();
 		this.file = file;
 		try {
 			Scanner readTxt = new Scanner(new File(this.file));
@@ -25,7 +23,8 @@ public class FileHolidayDao implements HolidayDao {
 				String[] parts = readTxt.nextLine().split(";");
 				String destination = parts[0];
 				int budget = Integer.parseInt(parts[1]);
-				User user = users.getAll().stream().filter(u->u.getUsername().equals(parts[2])).findFirst().orElse(null);
+				User user = users.getAll().stream().filter(u -> u.getUsername().equals(parts[2])).findFirst()
+						.orElse(null);
 				Holiday test = new Holiday(destination, budget, user);
 				holidays.add(test);
 			}
@@ -37,17 +36,25 @@ public class FileHolidayDao implements HolidayDao {
 	}
 
 	private void save() throws Exception {
-        try (FileWriter writer = new FileWriter(new File(file))) {
-            for (Holiday holiday : holidays) {
-                writer.write(holiday.getDestination() + ";" + holiday.getBudget() + ";" + holiday.getUser().getUsername() + "\n");
-            }
-        }
+		try (FileWriter writer = new FileWriter(new File(file))) {
+			for (Holiday holiday : holidays) {
+				writer.write(holiday.getDestination() + ";" + holiday.getBudget() + ";"
+						+ holiday.getUser().getUsername() + "\n");
+			}
+		}
 	}
-	
+
 	public List<Holiday> getAll() {
-		return holidays;
+//		List<Holiday> usersList = new ArrayList<>();
+//		for (Holiday hol : holidays) {
+//			if (hol.getUser() == user) {
+//				usersList.add(hol);
+//			}
+//		}
+//		return usersList;
+		return this.holidays;
 	}
-	
+
 	@Override
 	public Holiday findByDestination(String destination) {
 		return holidays.stream().filter(h -> h.getDestination().equals(destination)).findFirst().orElse(null);
@@ -59,19 +66,22 @@ public class FileHolidayDao implements HolidayDao {
 		save();
 		return holiday;
 	}
-	
+
 	public void cancel(Holiday holiday) throws Exception {
+		holiday.setActivities(null);
+		holiday.setBudget(0);
+		holiday.setNotComing();
 		holidays.remove(holiday);
 		save();
 	}
 
-	public void setPast(int id) throws Exception {
-		for (Holiday holiday : holidays) {
-			if(holiday.getId() == id) {
-				holiday.setNotComing();
-			}
-		}
-		save();
-	}
+//	public void setPast(int id) throws Exception {
+//		for (Holiday holiday : holidays) {
+//			if (holiday.getId() == id) {
+//				holiday.setNotComing();
+//			}
+//		}
+//		save();
+//	}
 
 }
