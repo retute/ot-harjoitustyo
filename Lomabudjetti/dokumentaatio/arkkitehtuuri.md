@@ -25,6 +25,7 @@ BorderPane-olioita. Kun näkymä vaihtuu, niin halutun näkymän Scene-olio
 lisätään sovelluksen stageen.
 
 ## Sovelluslogiikka
+![Luokkakaavio](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/holidayluokkakaavio.png)
 
 
 ## Tietojen pysyväistallennus
@@ -33,6 +34,19 @@ lisätään sovelluksen stageen.
 
 ### Päätoiminnallisuudet
 
-## Ohjelman rakenteen heikkoudet
+#### Sisäänkirjautiminen
+![Sisäänkirjautuminen](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/login.png)
 
-![Luokkakaavio](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/holidayluokkakaavio.png)
+#### Uuden käyttäjän luominen
+![Uusikäyttäjä](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/newuser.png)
+
+#### Loman lisääminen
+![Uusiloma](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/addholiday.png)
+
+#### Loman poistaminen
+![Poistaloma](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/deleteholiday.png)
+
+#### Loman avaaminen
+
+
+## Ohjelman rakenteen heikkoudet
