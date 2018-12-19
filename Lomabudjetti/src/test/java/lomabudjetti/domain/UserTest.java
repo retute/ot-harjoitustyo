@@ -1,11 +1,7 @@
 package lomabudjetti.domain;
-import lomabudjetti.domain.*;
 import java.util.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -48,6 +44,6 @@ public class UserTest {
     	holidays.add(hol);
     	user.setList(holidays);
     	
-    	assertEquals(user.getHoliday(hol.getId()), hol.getDestination());
+    	assertEquals(user.getHoliday(hol.getDestination()), "Paris");
     }
 }

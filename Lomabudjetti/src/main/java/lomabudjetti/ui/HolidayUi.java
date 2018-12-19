@@ -332,6 +332,7 @@ public class HolidayUi extends Application {
 			this.stage.setScene(loginScene);
 			this.userMsg.setTextFill(Color.GREEN);
 			this.userMsg.setText("Logged out successfully!");
+			this.hs.logOut();
 		});
 		goBack.setOnAction(e -> {
 			this.stage.setScene(allHolidays);

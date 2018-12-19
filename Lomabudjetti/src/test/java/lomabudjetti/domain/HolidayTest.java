@@ -1,13 +1,9 @@
 package lomabudjetti.domain;
 
 import lomabudjetti.dao.HolidayDao;
-import lomabudjetti.domain.*;
 import java.util.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,7 +17,6 @@ public class HolidayTest {
     public void setUp() {
         user = new User("Mike");
         holiday = new Holiday("Krabi", 1000, user);
-//        hdao = new HolidayDao();
     }
 
     @Test
@@ -42,8 +37,8 @@ public class HolidayTest {
 
     @Test
     public void holidaySetActivitiesAreCorrect() {
-        Activity ac = new Activity("JetSki", holiday);
-        Activity act = new Activity("Snorkling", holiday);
+        Activity ac = new Activity("JetSki", 50, holiday);
+        Activity act = new Activity("Snorkling", 80, holiday);
         List<Activity> list = new ArrayList<>();
 
         list.add(ac);
@@ -54,10 +49,10 @@ public class HolidayTest {
         assertEquals(list, holiday.getActivities());
     }
     
-//    @Test
-//    public void checkCostOfActivitiesGivesRightPrice() {
-//    	
-//    }
+    @Test
+    public void checkCostOfActivitiesGivesRightPrice() {
+    	assertEquals(holiday.checkCostOfActivities(), 130);
+    }
 
 //
 //    @Test

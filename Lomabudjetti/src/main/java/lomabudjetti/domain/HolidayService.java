@@ -14,7 +14,6 @@ public class HolidayService {
 	private ActivityDao activityDao;
 	private HolidayDao holidayDao;
 	private User user;
-//	private Holiday holiday;
 
 	public HolidayService(UserDao userDao, HolidayDao holidayDao, ActivityDao activityDao) {
 		this.userDao = userDao;
@@ -62,6 +61,13 @@ public class HolidayService {
 		return holidayDao.getAll();
 	}
 	
+	/**
+	 * Metodi palauttaa valitun käyttäyän lomalistan.
+	 *
+	 * @param user Käyttäjä, jonka lomat halutaan palauttaa.
+	 * 
+	 * @return List<Holiday> Lista käyttäjän lomista.
+	 */
 	public List<Holiday> getUsersHolidays(User use) {
 		use = user;
 		List<Holiday> users = new ArrayList<>();
@@ -73,8 +79,19 @@ public class HolidayService {
 		return users;		
 	}
 
-	public boolean planActivity(String destination, int price, Holiday holiday) {
-		Activity activity = new Activity(destination, price, holiday);
+	/**
+	 * Metodi suunnittelee loman annettujen parametrien mukaan. Jos
+	 * loman lisääminen käyttäjälle onnistuu, niin metodi palauttaa true.
+	 * Muussa tapauksessa metodi palauttaa false.
+	 *
+	 * @param name Aktiviteetin nimi
+	 * @param price Aktiviteetin hinta
+	 * @param holiday Loma, johon aktiviteetti lisätään
+	 * 
+	 * @return true/false
+	 */
+	public boolean planActivity(String name, int price, Holiday holiday) {
+		Activity activity = new Activity(name, price, holiday);
 		try {
 			activityDao.create(activity);
 		} catch (Exception exception) {
@@ -91,14 +108,6 @@ public class HolidayService {
 		}
 		return true;
 	}
-
-//	public List<String> getDestinations() {
-//		List<String> destinations = new ArrayList<>();
-//		for (Holiday hol : user.getHolidays()) {
-//			destinations.add(hol.getDestination());
-//		}
-//		return destinations;
-//	}
 
 	public List<Activity> getActivities() {
 		return activityDao.getAll();
