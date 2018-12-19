@@ -22,18 +22,17 @@ public class HolidayUi extends Application {
 
 	private HolidayService hs;
 
-	private Scene allHolidays; // list of holidays
+	private Scene allHolidays;
 	private Scene newHolidayScene;
-	private Scene loginScene; // log in page
-	private Scene newUserScene; // create a new user page
-	private Scene activityScene; // holiday's activity list
+	private Scene loginScene;
+	private Scene newUserScene;
+	private Scene activityScene;
 
 	private VBox holidayNodes;
 	private VBox activityNodes;
 	private Holiday holiday;
 	private Stage stage;
-	private Label userMsg;
-	private Label loginPageMsg;
+	private Label userMsg = new Label();
 
 	@Override
 	public void init() throws Exception {
@@ -71,7 +70,7 @@ public class HolidayUi extends Application {
 
 	public void getHolidaysAsList() {
 		holidayNodes.getChildren().clear();
-		List<Holiday> holidays = hs.getHolidays();
+		List<Holiday> holidays = hs.getUsersHolidays(hs.getLoggedUser());
 		holidays.forEach(holidayh -> {
 			holidayNodes.getChildren().add(planHolidayNode(holidayh));
 		});
@@ -102,7 +101,6 @@ public class HolidayUi extends Application {
 	}
 
 	public Scene setLoginScene() {
-		this.loginPageMsg = new Label("");
 		BorderPane loginbp = new BorderPane();
 		this.loginScene = new Scene(loginbp);
 
@@ -121,7 +119,7 @@ public class HolidayUi extends Application {
 		logingp.add(loginInput, 0, 2);
 		logingp.add(btnLogin, 0, 4);
 		logingp.add(btnCreate, 1, 4);
-		logingp.add(loginPageMsg, 0, 1);
+		logingp.add(userMsg, 0, 1);
 
 		btnLogin.setOnAction(e -> {
 			String username = loginInput.getText();
@@ -129,11 +127,11 @@ public class HolidayUi extends Application {
 				this.hs.login(username);
 				stage.setTitle("User: " + username);
 				stage.setScene(setHolidaylistScene());
-				loginPageMsg.setText("");
+				userMsg.setText("");
 				loginInput.setText("");
 			} else {
-				loginPageMsg.setTextFill(Color.RED);
-				loginPageMsg.setText("Something went wrong, try again!");
+				userMsg.setTextFill(Color.RED);
+				userMsg.setText("Something went wrong, try again!");
 				loginInput.setText("");
 			}
 		});
@@ -145,11 +143,8 @@ public class HolidayUi extends Application {
 	}
 
 	public Scene setSigninScene() {
-		this.userMsg = new Label();
+//		this.userMsg = new Label();
 		BorderPane newUserbp = new BorderPane();
-
-		Label resultMsg = new Label();
-		resultMsg.setText("Message");
 
 		GridPane createUserGP = new GridPane();
 		createUserGP.setPadding(new Insets(20));
@@ -165,18 +160,23 @@ public class HolidayUi extends Application {
 		createUserGP.add(usernameInput, 0, 2);
 		createUserGP.add(newUserBtn, 0, 3);
 		createUserGP.add(goBackBtn, 2, 3);
-		createUserGP.add(resultMsg, 0, 0);
+		createUserGP.add(userMsg, 0, 0);
 
 		newUserBtn.setOnAction(e -> {
 			String username = usernameInput.getText();
 			if (usernameInput.getText().length() <= 3) {
-				resultMsg.setText("Username is too short, try again");
-				stage.setScene(setSigninScene());
+				userMsg.setTextFill(Color.RED);
+				userMsg.setText("Username is too short, try again");
+				usernameInput.setText("");
 			} else if (hs.createUser(username)) {
+				userMsg.setTextFill(Color.GREEN);
 				userMsg.setText("New user created successfully, now login!");
 				stage.setScene(setLoginScene());
+				usernameInput.setText("");
 			} else {
-				resultMsg.setText("Username isn't available, try again.");
+				userMsg.setTextFill(Color.RED);
+				userMsg.setText("Username isn't available, try again.");
+				usernameInput.setText("");
 			}
 		});
 		goBackBtn.setOnAction(e -> stage.setScene(loginScene));
@@ -226,8 +226,8 @@ public class HolidayUi extends Application {
 
 		logoutBtn.setOnAction(e -> {
 			stage.setScene(setLoginScene());
-			this.loginPageMsg.setTextFill(Color.GREEN);
-			this.loginPageMsg.setText("Logged out successfully!");
+			this.userMsg.setTextFill(Color.GREEN);
+			this.userMsg.setText("Logged out successfully!");
 			this.hs.logOut();
 		});
 
@@ -296,8 +296,8 @@ public class HolidayUi extends Application {
 
 		logoutBtn.setOnAction(e -> {
 			stage.setScene(setLoginScene());
-			this.loginPageMsg.setTextFill(Color.GREEN);
-			this.loginPageMsg.setText("Logged out successfully!");
+			this.userMsg.setTextFill(Color.GREEN);
+			this.userMsg.setText("Logged out successfully!");
 			this.hs.logOut();
 		});
 
@@ -362,19 +362,19 @@ public class HolidayUi extends Application {
 			} else {
 				try {
 					int price = Integer.parseInt(priceInput.getText());
-					if (holiday.checkCostOfActivities() < price) {
+//					if (holiday.checkCostOfActivities() < price) {
 						userMsg.setTextFill(Color.RED);
 						userMsg.setText("You don't have enough money for this activity.");
 						nameInput.setText("");
 						priceInput.setText("");
-					} else {
+//					} else {
 						Activity activ = new Activity(nameInput.getText(), price, this.holiday);
 						hs.planActivity(activ);
 						userMsg.setText("");
 						nameInput.setText("");
 						priceInput.setText("");
 						getActivitiesAsList();
-					}
+//					}
 				} catch (NumberFormatException ex) {
 					userMsg.setText("Give the price as numbers.");
 					priceInput.setText("");

@@ -59,8 +59,18 @@ public class HolidayService {
 	}
 
 	public List<Holiday> getHolidays() {
-		
 		return holidayDao.getAll();
+	}
+	
+	public List<Holiday> getUsersHolidays(User use) {
+		use = user;
+		List<Holiday> users = new ArrayList<>();
+		for (Holiday hol : this.holidayDao.getAll()) {
+			if (hol.getUser() == use) {
+				users.add(hol);
+			}
+		}
+		return users;		
 	}
 
 	public boolean planActivity(Activity activity) {
@@ -98,6 +108,13 @@ public class HolidayService {
 	}
 
 	public List<Activity> findHolidayActivities(Holiday hol) {
+//		List<Activity> all = new ArrayList<>();
+//		all = activityDao.getAll();
+//		for (Activity act : all) {
+//			if (act.getHoliday() != hol) {
+//				all.remove(act);
+//			}
+//		}
 		return activityDao.getAll();
 	}
 

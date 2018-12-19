@@ -2,7 +2,7 @@ package lomabudjetti.dao;
 
 import lomabudjetti.domain.Activity;
 import lomabudjetti.domain.Holiday;
-import lomabudjetti.domain.User;
+//import lomabudjetti.domain.User;
 
 import java.io.File;
 import java.io.FileWriter;

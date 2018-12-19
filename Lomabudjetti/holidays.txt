@@ -1,3 +1,5 @@
 Kalasatama;5;terotero
 Thaimaa;500;terotero
-Viro;2000;terotero
+Jenkki;1500;terotero
+Korvatunturi;300;joulupukki
+Korso;20;terotero
