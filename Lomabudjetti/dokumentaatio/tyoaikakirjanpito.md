@@ -20,6 +20,7 @@ Päivä | Aika | Mitä tein
 9.12. | 4 | Lomien listausnäkymä ja pieniä muutoksia luokissa
 10.12. | 5 | Testejä ja näkymää
 11.12. | 3 | Käyttöohjeet ja näkymää
+18.12. | 6 | Toiminnallisuutta ja sekvenssikaavioita
+19.12. | 5 | Toiminnallisuuden hiomista ja käyttöohjeet
 
-
-Yhteensä 49
+Yhteensä 60
