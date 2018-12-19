@@ -78,11 +78,12 @@ public class HolidayUi extends Application {
 
 	public Node planActivityNode(Activity act) {
 		HBox actiBox = new HBox(10);
-		Label lbl = new Label(act.getName() + ", " + act.getPrice() + "€");
+		Label lbl = new Label(act.getName() + ", \n" + act.getPrice() + "€");
 		lbl.setMinHeight(30);
 		Button btn = new Button("Delete");
 		btn.setOnAction(e -> {
 			hs.deleteActivity(act);
+			getActivitiesAsList();
 		});
 		Region reg = new Region();
 		HBox.setHgrow(reg, Priority.ALWAYS);
@@ -204,7 +205,7 @@ public class HolidayUi extends Application {
 		allHolidaybp.setRight(userMsg);
 
 		HBox showHolidayMenu = new HBox(10);
-		Label openText = new Label("Holiday's destination: ");
+		Label openText = new Label("Write the destination that you want to open: ");
 		TextField openHoliday = new TextField();
 		Button tryOpen = new Button("Open");
 
@@ -216,7 +217,8 @@ public class HolidayUi extends Application {
 			if (hs.findHoliday(text) != null) {
 				this.holiday = hs.findHoliday(text);
 				stage.setScene(setActivityScene());
-				userMsg.setText("");
+				userMsg.setTextFill(Color.BLACK);
+				userMsg.setText("Add new activity to the list.");
 				openHoliday.setText("");
 			} else {
 				userMsg.setTextFill(Color.RED);
@@ -319,7 +321,6 @@ public class HolidayUi extends Application {
 		BorderPane activitiesbp = new BorderPane();
 		this.activityScene = new Scene(activitiesbp);
 		ScrollPane activityScroll = new ScrollPane();
-		userMsg = new Label();
 		HBox menu = new HBox(10);
 		Region reg = new Region();
 		Button logout = new Button("Log out");
@@ -362,20 +363,23 @@ public class HolidayUi extends Application {
 			} else {
 				try {
 					int price = Integer.parseInt(priceInput.getText());
-//					if (holiday.checkCostOfActivities() < price) {
+					String name = nameInput.getText();
+					if (this.holiday.getBudget() >= price) {
+						hs.planActivity(name, price, this.holiday);
+						userMsg.setTextFill(Color.GREEN);
+						userMsg.setText("Activity added.");
+						nameInput.setText("");
+						priceInput.setText("");
+						getActivitiesAsList();
+					} else {
 						userMsg.setTextFill(Color.RED);
 						userMsg.setText("You don't have enough money for this activity.");
 						nameInput.setText("");
 						priceInput.setText("");
-//					} else {
-						Activity activ = new Activity(nameInput.getText(), price, this.holiday);
-						hs.planActivity(activ);
-						userMsg.setText("");
-						nameInput.setText("");
-						priceInput.setText("");
 						getActivitiesAsList();
-//					}
+					}
 				} catch (NumberFormatException ex) {
+					userMsg.setTextFill(Color.RED);
 					userMsg.setText("Give the price as numbers.");
 					priceInput.setText("");
 				}

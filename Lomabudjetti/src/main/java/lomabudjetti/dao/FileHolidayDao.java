@@ -23,8 +23,7 @@ public class FileHolidayDao implements HolidayDao {
 				String[] parts = readTxt.nextLine().split(";");
 				String destination = parts[0];
 				int budget = Integer.parseInt(parts[1]);
-				User user = users.getAll().stream().filter(u -> u.getUsername().equals(parts[2])).findFirst()
-						.orElse(null);
+				User user = users.getAll().stream().filter(u -> u.getUsername().equals(parts[2])).findFirst().orElse(null);
 				Holiday test = new Holiday(destination, budget, user);
 				holidays.add(test);
 			}
@@ -45,13 +44,6 @@ public class FileHolidayDao implements HolidayDao {
 	}
 
 	public List<Holiday> getAll() {
-//		List<Holiday> usersList = new ArrayList<>();
-//		for (Holiday hol : holidays) {
-//			if (hol.getUser() == user) {
-//				usersList.add(hol);
-//			}
-//		}
-//		return usersList;
 		return this.holidays;
 	}
 
@@ -74,14 +66,5 @@ public class FileHolidayDao implements HolidayDao {
 		holidays.remove(holiday);
 		save();
 	}
-
-//	public void setPast(int id) throws Exception {
-//		for (Holiday holiday : holidays) {
-//			if (holiday.getId() == id) {
-//				holiday.setNotComing();
-//			}
-//		}
-//		save();
-//	}
 
 }

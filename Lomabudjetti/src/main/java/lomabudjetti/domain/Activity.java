@@ -6,13 +6,8 @@ public class Activity {
     private int price;
     private Holiday holiday;
     
-    public Activity(String activity, Holiday holiday) {
-    	this.name = activity;
-    	this.holiday = holiday;
-    }
-    
-    public Activity(String activity, int price, Holiday holiday) {
-    	this.name = activity;
+    public Activity(String name, int price, Holiday holiday) {
+    	this.name = name;
         this.price = price;
         this.holiday = holiday;
 

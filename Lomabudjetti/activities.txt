@@ -1,1 +1,2 @@
-;40;Thaimaa
+Bussi;2;Kalasatama
+Ruoka;5;Kalasatama

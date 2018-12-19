@@ -73,7 +73,8 @@ public class HolidayService {
 		return users;		
 	}
 
-	public boolean planActivity(Activity activity) {
+	public boolean planActivity(String destination, int price, Holiday holiday) {
+		Activity activity = new Activity(destination, price, holiday);
 		try {
 			activityDao.create(activity);
 		} catch (Exception exception) {
@@ -91,13 +92,13 @@ public class HolidayService {
 		return true;
 	}
 
-	public List<String> getDestinations() {
-		List<String> destinations = new ArrayList<>();
-		for (Holiday hol : user.getHolidays()) {
-			destinations.add(hol.getDestination());
-		}
-		return destinations;
-	}
+//	public List<String> getDestinations() {
+//		List<String> destinations = new ArrayList<>();
+//		for (Holiday hol : user.getHolidays()) {
+//			destinations.add(hol.getDestination());
+//		}
+//		return destinations;
+//	}
 
 	public List<Activity> getActivities() {
 		return activityDao.getAll();
@@ -108,14 +109,13 @@ public class HolidayService {
 	}
 
 	public List<Activity> findHolidayActivities(Holiday hol) {
-//		List<Activity> all = new ArrayList<>();
-//		all = activityDao.getAll();
-//		for (Activity act : all) {
-//			if (act.getHoliday() != hol) {
-//				all.remove(act);
-//			}
-//		}
-		return activityDao.getAll();
+		List<Activity> all = new ArrayList<>();
+		for (Activity act : activityDao.getAll()) {
+			if (act.getHoliday() == hol) {
+				all.add(act);
+			}
+		}
+		return all;
 	}
 
 	public boolean createUser(String username) {

@@ -22,10 +22,10 @@ public class FileActivityDao implements ActivityDao {
             Scanner reader = new Scanner(new File(this.file));
             while (reader.hasNextLine()) {
                 String[] parts = reader.nextLine().split(";");
-                String activityName  = parts[0];
+                String name  = parts[0];
                 int price = Integer.parseInt(parts[1]);
                 Holiday holiday = holidays.getAll().stream().filter(h->h.getDestination().equals(parts[2])).findFirst().orElse(null);
-                Activity activity = new Activity(activityName, price, holiday);
+                Activity activity = new Activity(name, price, holiday);
                 activities.add(activity);
             }
             reader.close();
