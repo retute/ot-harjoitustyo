@@ -20,15 +20,6 @@ public class Holiday {
 		this.activitiesCost = 0;
 	}
 
-	public Holiday(int id, String destination, User user, int budget, List<Activity> activities) {
-		this.destination = destination;
-		this.budget = budget;
-		this.user = user;
-		this.activities = activities;
-		this.coming = true;
-		this.activitiesCost = 0;
-	}
-
 	public void addActivity(Activity activity) {
 		activities.add(activity);
 		budget-=activity.getPrice();

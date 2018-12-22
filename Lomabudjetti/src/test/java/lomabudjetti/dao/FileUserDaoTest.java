@@ -3,7 +3,6 @@ package lomabudjetti.dao;
 
 import java.io.File;
 import lomabudjetti.domain.User;
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,7 @@ public class FileUserDaoTest {
 	
 	File userFile;
 	UserDao dao;
-        User user;
+    User user;
 
 	@Before
 	public void setUp() throws Exception {

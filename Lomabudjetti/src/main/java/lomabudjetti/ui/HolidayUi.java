@@ -52,7 +52,7 @@ public class HolidayUi extends Application {
 
 	public Node planHolidayNode(Holiday hol) {
 		HBox holiBox = new HBox(10);
-		Label lbl = new Label(hol.getDestination() + ", \n " + hol.getBudget() + "€");
+		Label lbl = new Label(hol.getDestination() + ", \n Holiday's budget: " + hol.getBudget() + "€");
 		lbl.setMinHeight(30);
 		Button btn1 = new Button("Cancel");
 		btn1.setOnAction(e -> {
@@ -322,7 +322,7 @@ public class HolidayUi extends Application {
 	}
 
 	public Scene setActivityScene() {
-		this.stage.setTitle(hs.getLoggedUser().getUsername() + " goes to " + this.holiday.getDestination() + ". You have " + this.holiday.getBudget() + "€ to spend for the activities");
+		this.stage.setTitle(hs.getLoggedUser().getUsername() + " goes to " + this.holiday.getDestination());
 		BorderPane activitiesbp = new BorderPane();
 		this.activityScene = new Scene(activitiesbp);
 		ScrollPane activityScroll = new ScrollPane();

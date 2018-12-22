@@ -1,13 +1,19 @@
 package lomabudjetti.domain;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import lomabudjetti.dao.HolidayDao;
 
 
 
 public class HolidayServiceTest {
 	
 	HolidayService hs;
+	HolidayDao hd;
 	User user;
 	
 
@@ -17,7 +23,6 @@ public class HolidayServiceTest {
 
 	@Test
 	public void planHolidayCreatesNewHoliday() {
-
 	}
 
 	@Test

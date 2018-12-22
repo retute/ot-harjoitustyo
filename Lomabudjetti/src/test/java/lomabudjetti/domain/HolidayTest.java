@@ -1,6 +1,5 @@
 package lomabudjetti.domain;
 
-import lomabudjetti.dao.HolidayDao;
 import java.util.*;
 
 import org.junit.Before;
@@ -11,7 +10,6 @@ public class HolidayTest {
 
     Holiday holiday;
     User user;
-    HolidayDao hdao;
 
     @Before
     public void setUp() {
@@ -48,20 +46,12 @@ public class HolidayTest {
 
         assertEquals(list, holiday.getActivities());
     }
-//    
-//    @Test
-//    public void checkCostOfActivitiesGivesRightPrice() {
-//    	assertEquals(holiday.checkCostOfActivities(), 130);
-//    }
 
-//
-//    @Test
-//    public void setNotComingWorks() {
-//
-//    }
-//
-//    @Test
-//    public void addActivityWorks() {
-//
-//    }
+    @Test
+    public void moneyForTheActivityWorks() {
+    	Activity ac = new Activity("JetSki", 50, holiday);
+    	assertTrue(holiday.moneyForTheActivity(ac));
+    }
+
+
 }

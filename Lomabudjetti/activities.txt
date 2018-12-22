@@ -1,1 +1,2 @@
 Porot;150;Korvatunturi
+Hotel;100;Jenkki

@@ -13,7 +13,6 @@ public class FileActivityDao implements ActivityDao {
 	
 	public List<Activity> activities;
 	private String file;
-//	private User user;
 	
 	public FileActivityDao(String file, HolidayDao holidays) throws Exception {
 		this.activities = new ArrayList<>();
