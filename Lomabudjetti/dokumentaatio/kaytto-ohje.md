@@ -2,6 +2,7 @@
 
 ## Ohjelman lataaminen
 
+
 ## Käynnistäminen
 Ohjelma käynnistyy komennolla
 > java -jar Lomabudjetti.jar
@@ -50,10 +51,17 @@ laitetaan aktiviteetin nimi ja toiseen hinta. Molemmissa tekstikentissä
 täytyy olla sisältöä ja hinta tulee olla annettuna kokonaislukuna. Jos 
 näin ei ole, niin ohjelma valittaa eikä lisää aktiviteettiä listaan.
 
-Myös, jos aktiviteetin hinta ylittää budjetin, niin lomaa ei lisätä 
-listaan.
+Jos aktiviteetin hinta ylittää budjetin, niin lomaa ei lisätä 
+listaan. Tällöin ohjelma valittaa, että budjetti ei riitä ja kertoo, kuinka paljon 
+rahaa on jäljellä.
 
 ## Aktiviteettien poistaminen
 Jokaisen aktiviteetin perässä on *"Delete"*-nappi. Tätä painamalla 
-käyttäjä voi poistaa aktiviteetin lomalistasta. 
+käyttäjä voi poistaa aktiviteetin lomalistasta. Poistetun aktiviteetin hinta lisätään 
+takaisin jäljellä olevaan budjettiin.
+
+
+## Ohjelman heikkoudet
+- Käyttäjällä, lomilla, aktiviteeteilla ei ole id-tunnusta. Jos useampi käyttäjä 
+lisää samannimisen loman, niin ohjelma lisää aktiviteetit molemmille lomille
 

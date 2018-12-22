@@ -22,5 +22,6 @@ Päivä | Aika | Mitä tein
 11.12. | 3 | Käyttöohjeet ja näkymää
 18.12. | 6 | Toiminnallisuutta ja sekvenssikaavioita
 19.12. | 5 | Toiminnallisuuden hiomista ja käyttöohjeet
+22.12. | 4 | Dokumentaation viimeistely, sovelluksen ajaminen ja jar-tiedosto
 
-Yhteensä 60
+Yhteensä 64
