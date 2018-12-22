@@ -34,6 +34,10 @@ public class FileHolidayDao implements HolidayDao {
 		}
 	}
 
+	/**
+	 * Metodi tallentaa uuden loman pysyvästi tiedostoon.
+	 * @throws Exception Jos tallennus ei onnisu.
+	 */
 	private void save() throws Exception {
 		try (FileWriter writer = new FileWriter(new File(file))) {
 			for (Holiday holiday : holidays) {
@@ -47,6 +51,13 @@ public class FileHolidayDao implements HolidayDao {
 		return this.holidays;
 	}
 
+	/**
+	 * Metodi etsii lomaa sen kohteen nimen perusteella. 
+	 * 
+	 * @param destination Halutun lomakohteen nimi
+	 * 
+	 * @return holiday Haluttu lomaolio
+	 */
 	@Override
 	public Holiday findByDestination(String destination) {
 		return holidays.stream().filter(h -> h.getDestination().equals(destination)).findFirst().orElse(null);
@@ -59,6 +70,11 @@ public class FileHolidayDao implements HolidayDao {
 		return holiday;
 	}
 
+	/**
+	 * Metodi peruu loman eli poistaa käyttäjän loman lomalistasta.
+	 * 
+	 * @param holiday Loma, joka halutaan perua.
+	 */
 	public void cancel(Holiday holiday) throws Exception {
 		holiday.setActivities(null);
 		holiday.setBudget(0);
