@@ -1,7 +1,8 @@
 # Käyttöohje
 
 ## Ohjelman lataaminen
-Ĺataa ohjelma [lomabudjetti.jar](https://github.com/retute/ot-harjoitustyo/releases/tag/Valmis)
+Ĺataa ohjelma 
+[Lomabudjetti.jar](https://github.com/retute/ot-harjoitustyo/releases/tag/Lopullinen)
 
 
 ## Käynnistäminen
