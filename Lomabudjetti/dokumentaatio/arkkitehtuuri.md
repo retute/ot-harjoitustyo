@@ -102,3 +102,6 @@ avaa activityScenen kyseisen loman aktiviteeteilla.
 
 ## Ohjelman rakenteen heikkoudet
 - Loman avaaminen on hankalaa. En vain millään osannut tehdä nappia, jolla saisi kyseisen loman avattua helpommin.
+- Käyttöliittymäluokka on todella suuri
+- Näkymien metodit ovat pitkiä. Niissä olisi voinut käyttää paremmin hyväksi niissä esiintyviä samoja rakenteita ja näin lyhentää koodia.
+- Testit eivät toimi tallennusominaisuuden takia.
