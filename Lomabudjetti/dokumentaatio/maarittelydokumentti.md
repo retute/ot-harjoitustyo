@@ -6,8 +6,8 @@ Sovellut on budjettisovellus. Tarkemmin se on tarkoitettu lomamatkan tai
 -matkojen aktiviteettien suunnitteluun budjetin sallimissa rajoissa. 
 Käyttäjä voi luoda useita lomia ja samalla asettaa jokaiselle oman 
 budjetin. Jokaiselle lomalle on mahdollista lisätä aktiviteettaja ja 
-mahdollisia menoja. Sen tarkoitus on auttaa 
-tulevan loman suunnittelussa sille asetetun budjetin ehdoin. 
+mahdollisia menoja. Sovelluksen tarkoitus on auttaa 
+tulevan loman budjetin suunnittelussa. 
 
 ## Käyttäjät
 Sovelluksella on normaaleja käyttäjiä, jotka 
@@ -18,6 +18,7 @@ ainoastaan omat lomansa listassa kirjauduttuaan.
 ### Ennen kirjautumista
 Käyttäjä voi luoda sovellukseen oman tunnuksensa. Tunnuksen oltava 
 uniikki ja vähintään 4 merkkiä.
+
 Käyttäjä voi kirjautua järjestelmään kirjautumissivulta, joka on 
 ohjelman etusivu. Jos tunnus on 
 olemassa ja on oikea, niin kirjautuminen onnistuu. Muuten järjestelmä 

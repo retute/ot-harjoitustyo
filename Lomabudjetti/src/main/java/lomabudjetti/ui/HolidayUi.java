@@ -82,6 +82,7 @@ public class HolidayUi extends Application {
 		lbl.setMinHeight(30);
 		Button btn = new Button("Delete");
 		btn.setOnAction(e -> {
+			act.getHoliday().setBudget(act.getHoliday().getBudget() + act.getPrice());
 			hs.deleteActivity(act);
 			getActivitiesAsList();
 		});
@@ -114,7 +115,11 @@ public class HolidayUi extends Application {
 		TextField loginInput = new TextField();
 		Button btnLogin = new Button("Login");
 		Button btnCreate = new Button("Sign in");
-		btnCreate.setOnAction(e -> stage.setScene(setSigninScene()));
+		btnCreate.setOnAction(e -> {
+			userMsg.setTextFill(Color.BLACK);
+			userMsg.setText("");
+			stage.setScene(setSigninScene());
+		});
 
 		logingp.add(lblUserName, 0, 0);
 		logingp.add(loginInput, 0, 2);
@@ -317,7 +322,7 @@ public class HolidayUi extends Application {
 	}
 
 	public Scene setActivityScene() {
-		this.stage.setTitle(hs.getLoggedUser().getUsername() + " goes to " + this.holiday.getDestination());
+		this.stage.setTitle(hs.getLoggedUser().getUsername() + " goes to " + this.holiday.getDestination() + ". You have " + this.holiday.getBudget() + "€ to spend for the activities");
 		BorderPane activitiesbp = new BorderPane();
 		this.activityScene = new Scene(activitiesbp);
 		ScrollPane activityScroll = new ScrollPane();
@@ -351,37 +356,39 @@ public class HolidayUi extends Application {
 
 		Label actName = new Label("Activity's name: ");
 		TextField nameInput = new TextField();
-		Label actPrice = new Label("Activity's price: ");
+		Label actPrice = new Label("Activity's price (€): ");
 		TextField priceInput = new TextField();
 		Button addAct = new Button("Add");
 
 		addAct.setOnAction(e -> {
 			if (nameInput.getText().isEmpty() || priceInput.getText().isEmpty()) {
 				userMsg.setTextFill(Color.RED);
-				userMsg.setText("Give the activity and its price.");
+				userMsg.setText("Give the activity and its price. Budget left: " + this.holiday.getBudget() + "€");
 				nameInput.setText("");
 				priceInput.setText("");
 			} else {
 				try {
 					int price = Integer.parseInt(priceInput.getText());
 					String name = nameInput.getText();
+					int holidaybudget = this.holiday.getBudget();
 					if (this.holiday.getBudget() >= price) {
 						hs.planActivity(name, price, this.holiday);
+						this.holiday.setBudget(holidaybudget - price);
 						userMsg.setTextFill(Color.GREEN);
-						userMsg.setText("Activity added.");
+						userMsg.setText("Activity added. Budget left: " + this.holiday.getBudget() + "€");
 						nameInput.setText("");
 						priceInput.setText("");
 						getActivitiesAsList();
 					} else {
 						userMsg.setTextFill(Color.RED);
-						userMsg.setText("You don't have enough money for this activity.");
+						userMsg.setText("You don't have enough money for this activity. Budget left: " + this.holiday.getBudget() + "€");
 						nameInput.setText("");
 						priceInput.setText("");
 						getActivitiesAsList();
 					}
 				} catch (NumberFormatException ex) {
 					userMsg.setTextFill(Color.RED);
-					userMsg.setText("Give the price as numbers.");
+					userMsg.setText("Give the price as numbers. Budget left: " + this.holiday.getBudget() + "€");
 					priceInput.setText("");
 				}
 			}
