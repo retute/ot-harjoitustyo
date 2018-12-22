@@ -67,6 +67,7 @@ palauttaa null ja kirjautumissivulle ilmestyy viesti "Something went wrong, try 
 
 ![Sisäänkirjautuminen](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/login.png)
 
+
 #### Uuden käyttäjän luominen
 Käyttäjä syöttää näkymän signinScene tekstikenttään haluamansa käyttäjänimen ja painaa nappia "Sign in". Jos käyttäjänimi on sopivan 
 pitkä, niin napista lähtee pyyntö käyttöliittymälle uuden käyttäjän lisäämisestä. Käyttöliittymä puolestaan lähettää pyynnön ja annetun 
@@ -77,14 +78,27 @@ löytyneen käyttäjän, niin ohjelma palauttaa false ja asettaa tunnuksenluonti
 
 ![Uusikäyttäjä](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/newuser.png)
 
+
 #### Loman lisääminen
+Käyttäjä loman lisäämisnäkymässä, jossa hän syöttää loman tiedot ja painaa nappia "Add new holiday". Napista lähtee lisäämispyynto 
+käyttöliittymälle, josta metodi planHoliday("Lomakohde", budjetti-int) lähettää pyynnön HolidayServicelle. HolidayService luo uuden loman ja 
+samalla lähettää loman tiedot HolidayDao-luokalle. HolidayDao tallentaa tiedot ja käyttöliittymä päivittää käyttäjän lomalistanäkymän niin, 
+että uusi loma ilmestyy listaan. 
+
 ![Uusiloma](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/addholiday.png)
 
+
 #### Loman poistaminen
+Käyttäjä on lomalistanäkymässä ja painaa loman "Cancel"-nappia. Tästä lähtee tieto käyttöliittymälle, joka lähettä pyynnon metodilla 
+cancelHoliday("Loma") HolidayServicelle. HolidayService lähettää pyynnön cancel("Loma") luokalle HolidayDao, joka poistaa loman tioedostosta 
+ja tallentaa tiedoston muutokset. Kun poisto on onnistunut, HolidayService palauttaa true ja käyttöliittymä päivittää listanäkymän.
 ![Poistaloma](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/deleteholiday.png)
 
 #### Loman avaaminen
-
+Käyttäjä syöttää halutun loman nimen listasivun alalaidassa olevaan tekstikenttään ja painaa nappia "Open". Tästä lähtee pyyntö 
+käyttölliittymälle, joka tarkastelee syötettä ja lähettää sen eteenpäin HolidayServicelle. HolidayServicen metodi findHoliday(syöte) 
+lähettää pyynnön HolidayDaolle. Jos loma löytyy, niin metodi palauttaa kyseisen loman. Koska palautuksena tule ei-null-palaute, niin ohjelma 
+avaa activityScenen kyseisen loman aktiviteeteilla.
 
 ## Ohjelman rakenteen heikkoudet
 - Loman avaaminen on hankalaa. En vain millään osannut tehdä nappia, jolla saisi kyseisen loman avattua helpommin.
