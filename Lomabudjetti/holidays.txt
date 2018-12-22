@@ -1,4 +1,3 @@
-Thaimaa;500;terotero
 Jenkki;1500;terotero
 Korvatunturi;300;joulupukki
 Korso;20;terotero

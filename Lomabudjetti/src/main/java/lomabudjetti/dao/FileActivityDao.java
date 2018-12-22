@@ -34,7 +34,7 @@ public class FileActivityDao implements ActivityDao {
             writer.close();
         }
 	}
-	
+
 	private void save() throws Exception {
 		try (FileWriter writer = new FileWriter(new File(file))) {
 			for (Activity activity : activities) {
@@ -43,7 +43,12 @@ public class FileActivityDao implements ActivityDao {
 		}
 	}
 	
-	
+	/**
+	 * Uuden aktiviteetin luominen
+	 * @param activity aktiviteetti, joka lomalle halutaan lisätä
+	 * 
+	 * @return activity aktiviteetti, joka lisättiin
+	 */
 	public Activity create(Activity activity) throws Exception {
 		int moneyleft = activity.getHoliday().getBudget();
 		if (moneyleft -activity.getPrice() >= 0) {

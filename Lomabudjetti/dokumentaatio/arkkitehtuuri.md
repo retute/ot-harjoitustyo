@@ -44,15 +44,37 @@ metodit:
 
 
 ## Tietojen pysyväistallennus
+Sovelluksessa on pakkaus lomabudjetti.dao, josta löytyy tallennuksesta vastaavat luokat.
+- UserDao
+- HolidayDao
+- ActivityDao
+- FileUserDao
+- FileHolidayDao
+- FileActivityDao
 
-### Tiedostot
+Nämä luokat vastaavat siitä, että käyttäjä ja hänen listaamat lomat aktiviteetteineen tallennetaan ja muistetaan myös uloskirjautumisen 
+jälkeen. Käyttäjät tallennetaan tiedostoon *users.txt*, lomat tiedostoon *holidays.txt" ja aktiviteetit tiedostoon *activities.txt*.
 
 ### Päätoiminnallisuudet
 
 #### Sisäänkirjautiminen
+Kun käyttäjä kirjautuu sisään hän syöttää ensin käyttäjänimensä tekstikenttään ja painaa nappia "Login". Napin painalluksen jälkeen ohjelma 
+lähettää kirjautumispyynnön käyttöliittymälle, joka lähettää tiedon syötetystä käyttäjänimestä ja pyynnön luokalle HolidayService. Tämän 
+jälkeen ohjelma käyttää luokan HolidayService metodia findByUsername("syötetty_nimi") ja lähettää pyynnon UserDao-luokalle. UderDao luokka 
+tutkii, löytyykö vastaavaa nimeä tiedostosta users.txt. Jos nimi löytyy, niin UserDao palauttaa kyseisen käyttäjän ja kirjautumispyyntö 
+hyväksytään ja näkymä eli stage saa uuden scenen stage.setScene(allHolidays). Jos käyttäjänimeä ei löydy tiedostoista, niin ohjelma 
+palauttaa null ja kirjautumissivulle ilmestyy viesti "Something went wrong, try again!".
+
 ![Sisäänkirjautuminen](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/login.png)
 
 #### Uuden käyttäjän luominen
+Käyttäjä syöttää näkymän signinScene tekstikenttään haluamansa käyttäjänimen ja painaa nappia "Sign in". Jos käyttäjänimi on sopivan 
+pitkä, niin napista lähtee pyyntö käyttöliittymälle uuden käyttäjän lisäämisestä. Käyttöliittymä puolestaan lähettää pyynnön ja annetun 
+käyttäjänimen luokalle HolidayService, joka lähettää metodilla findByUsername("annettu_käyttäjänimi") pyynnön luokalle UserDao. UserDao 
+palauttaa null, jos käyttäjää ei ole olemassa. Tällöin HolidayService lähettää uuden pyynnön, joka haluaa luoda uuden käyttäjän. Jos 
+käyttäjän luonti onnistuu, niin ohjelma palauttaa true ja siirtyy kirjautumissivulle. Jos metodi findByUsername("nimi") puolestaan palauttaa 
+löytyneen käyttäjän, niin ohjelma palauttaa false ja asettaa tunnuksenluontisivulle tekstin, joka ilmoittaa, että tunnus on varattu.
+
 ![Uusikäyttäjä](https://github.com/retute/ot-harjoitustyo/blob/master/Lomabudjetti/dokumentaatio/kuvat/newuser.png)
 
 #### Loman lisääminen
@@ -65,3 +87,4 @@ metodit:
 
 
 ## Ohjelman rakenteen heikkoudet
+- Loman avaaminen on hankalaa. En vain millään osannut tehdä nappia, jolla saisi kyseisen loman avattua helpommin.

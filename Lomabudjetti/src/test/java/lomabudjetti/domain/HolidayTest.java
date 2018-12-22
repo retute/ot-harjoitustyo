@@ -48,11 +48,11 @@ public class HolidayTest {
 
         assertEquals(list, holiday.getActivities());
     }
-    
-    @Test
-    public void checkCostOfActivitiesGivesRightPrice() {
-    	assertEquals(holiday.checkCostOfActivities(), 130);
-    }
+//    
+//    @Test
+//    public void checkCostOfActivitiesGivesRightPrice() {
+//    	assertEquals(holiday.checkCostOfActivities(), 130);
+//    }
 
 //
 //    @Test

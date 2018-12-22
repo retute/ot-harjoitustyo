@@ -63,6 +63,13 @@ public class FileHolidayDao implements HolidayDao {
 		return holidays.stream().filter(h -> h.getDestination().equals(destination)).findFirst().orElse(null);
 	}
 
+	/**
+	 * Metodi lisää loman käyttäjän listaan ja tallentaa sen pysyvästi tiedostoon.
+	 * 
+	 * @param holiday
+	 * 
+	 * @return holiday Loma, joka on juuri lisätty käyttäjän listaan.
+	 */
 	@Override
 	public Holiday create(Holiday holiday) throws Exception {
 		holidays.add(holiday);
